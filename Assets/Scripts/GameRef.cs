@@ -6,9 +6,13 @@ public class GameRef : MonoBehaviour
     
     //Available References
     [SerializeField] GameObject background;
+    [SerializeField] GameObject snakeBodyPrefab;
+    [SerializeField] private GameObject foodSpawner;
     
     //Getters
     public GameObject Background => background;
+    public GameObject SnakeBodyPrefab => snakeBodyPrefab;
+    public GameObject FoodSpawner => foodSpawner;
 
     private void Awake()
     {

@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   foodPrefab: {fileID: 3443883044627142788, guid: 9221404de78b69d468ffd1f4fb7b4164, type: 3}
+  foodLifetime: 10
 --- !u!4 &434696122
 Transform:
   m_ObjectHideFlags: 0
@@ -158,7 +159,7 @@ Transform:
   m_GameObject: {fileID: 434696120}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2591, y: -0.23391, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -430,6 +431,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   background: {fileID: 1550338523}
+  snakeBodyPrefab: {fileID: 1792063327127003922, guid: 6c640e12756cb85478bf4e4f3124ab34, type: 3}
+  foodSpawner: {fileID: 434696120}
 --- !u!1 &663536196
 GameObject:
   m_ObjectHideFlags: 0
