@@ -2,13 +2,19 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+ [SerializeField] private GameObject snakePrefab;
     void Start()
     {
         //Assign and create snake OB
-        GameObject snakeHeadObj = new GameObject();
-        SpriteRenderer snakeSpriteRenderer =  snakeHeadObj.AddComponent<SpriteRenderer>();
-        snakeSpriteRenderer.sprite = GameAssets.instance.snakeHeadSprite;
+        GameObject snakeHeadObj = Instantiate(snakePrefab);
+        SpriteRenderer snakeSpriteRenderer =  snakeHeadObj.GetComponent<SpriteRenderer>();
+
+        if (snakeSpriteRenderer == null)
+        {
+            snakeSpriteRenderer = snakeHeadObj.AddComponent<SpriteRenderer>();
+            snakeSpriteRenderer.sprite = GameAssets.instance.snakeHeadSprite;
+        }
+        
     }
 
     // Update is called once per frame
