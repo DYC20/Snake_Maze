@@ -10,7 +10,7 @@ public class GameRef : MonoBehaviour
     //Getters
     public GameObject Background => background;
 
-    void Awake()
+    private void Awake()
     {
         instance = this;
     }

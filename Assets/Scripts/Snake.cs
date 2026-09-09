@@ -9,6 +9,9 @@ public class Snake : MonoBehaviour
     private Vector2Int snakePosition;
     private Vector2Int snakeDirection;
     private float timer = 0f;
+    private Camera mainCamera;
+    private Vector2Int minBounds;
+    private Vector2Int maxBounds;
 
     private void Awake()
     {
@@ -27,12 +30,36 @@ public class Snake : MonoBehaviour
 
     private void Start()
     {
+        mainCamera = Camera.main;
+        CameraBounds();
+    }
 
+    private void CameraBounds()
+    {
+        //Written with AI Start
+        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(
+            new Vector3(0f, 0f, -mainCamera.transform.position.z)
+        );
+
+        Vector3 topRight = mainCamera.ViewportToWorldPoint(
+            new Vector3(1f, 1f, -mainCamera.transform.position.z)
+        );
+
+        minBounds = new Vector2Int(
+            Mathf.CeilToInt(bottomLeft.x),
+            Mathf.CeilToInt(bottomLeft.y)
+        );
+
+        maxBounds = new Vector2Int(
+            Mathf.FloorToInt(topRight.x),
+            Mathf.FloorToInt(topRight.y)
+        );
+        //Written with AI End
     }
 
     private void Update()
     {
-        PosisitionSnake();
+        HandleInput();
         timer += Time.deltaTime;
         if ( timer >= timerMax )
         {
@@ -42,7 +69,7 @@ public class Snake : MonoBehaviour
         }
     }
 
-    private void PosisitionSnake()
+    private void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
@@ -72,10 +99,35 @@ public class Snake : MonoBehaviour
             snakeDirection = Vector2Int.right;
         }
 
+        WrapPosition();
+        
         transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
 
         transform.position = new Vector3(snakePosition.x, snakePosition.y);
         //Debug.Log("snake position:" + snakePosition);
+    }
+
+    private void WrapPosition()
+    {
+        //Written with AI Start
+        if (snakePosition.x < minBounds.x)
+        {
+            snakePosition.x = maxBounds.x;
+        }
+        else if (snakePosition.x > maxBounds.x)
+        {
+            snakePosition.x = minBounds.x;
+        }
+
+        if (snakePosition.y < minBounds.y)
+        {
+            snakePosition.y = maxBounds.y;
+        }
+        else if (snakePosition.y > maxBounds.y)
+        {
+            snakePosition.y = minBounds.y;
+        }
+        //Written with AI Ends
     }
 
     private float GetAngleFromVector(Vector2 dir)
