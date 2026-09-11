@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 public class Snake : MonoBehaviour
 {
-    [SerializeField] private float timerMax = 1f;
+    [SerializeField] private float movemantSpeed = 1f;
+    [SerializeField] private float speedIncrease = 0.1f;
     [SerializeField] private GameObject snakeBodyPrefab;
     private Vector2Int snakePosition;
     private Vector2Int previousHeadPosition;
@@ -48,6 +49,7 @@ public class Snake : MonoBehaviour
 
     private void Start()
     {
+        timer = 1f / movemantSpeed;
         snakeBodyList = new List<Transform>();
         foodSpawner = GameRef.instance.FoodSpawner.GetComponent<FoodSpawner>();
     }
@@ -55,11 +57,11 @@ public class Snake : MonoBehaviour
     private void Update()
     {
         HandleInput();
-        timer += Time.deltaTime;
-        if ( timer >= timerMax )
+        timer -= Time.deltaTime;
+        if ( timer <= 0 )
         {
             //move snake in direction
-            timer -= timerMax;
+            timer += 1f / movemantSpeed;
             MoveSnake();
         }
     }
@@ -154,7 +156,10 @@ public class Snake : MonoBehaviour
     private void EatFood()
     {
         //Add points
-        //Writen with AI starts
+        
+        //Increase speed
+        movemantSpeed += speedIncrease;
+        //Written with AI starts
         int newBodyIndex = snakeBodyList.Count;
         
         if (newBodyIndex >= snakeMovePositionList.Count)
