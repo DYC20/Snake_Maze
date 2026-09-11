@@ -25,8 +25,8 @@ public class FoodSpawner : MonoBehaviour
     private Vector2Int posGridmax;
     private Vector2Int minBounds;
     private Vector2Int maxBounds;
-    private Vector2Int foodGridPos;
-    public Vector2Int FoodGridPos => foodGridPos;
+    private Vector2Int foodPos;
+    public Vector2Int FoodPos => foodPos;
 
 
     private void Start()
@@ -46,8 +46,8 @@ public class FoodSpawner : MonoBehaviour
     }
     private void SpawnFood()
      {
-         foodGridPos = new Vector2Int(Random.Range(posGridmin.x, posGridmax.x), Random.Range(posGridmin.y, posGridmax.y));
-         food = Instantiate(foodPrefab, new Vector3(foodGridPos.x, foodGridPos.y), Quaternion.identity);
+         foodPos = new Vector2Int(Random.Range(posGridmin.x, posGridmax.x), Random.Range(posGridmin.y, posGridmax.y));
+         food = Instantiate(foodPrefab, new Vector3(foodPos.x, foodPos.y), Quaternion.identity);
      }
 
     private void FoodCycle()

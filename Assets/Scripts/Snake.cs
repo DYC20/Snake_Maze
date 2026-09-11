@@ -1,15 +1,20 @@
 using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Snake : MonoBehaviour
 {
-    [SerializeField] private GameObject background; 
     [SerializeField] private float timerMax = 1f;
+    [SerializeField] private GameObject snakeBodyPrefab;
     private Vector2Int snakePosition;
+    private Vector2Int previousHeadPosition;
+    private Vector2Int nextDirection = Vector2Int.up;
+    private bool directionQueued;
     private Vector2Int snakeDirection;
+    private List<Vector2Int> snakeMovePositionList; 
+    private List<Transform> snakeBodyList;
     private float timer = 0f;
-    //private Camera mainCamera;
     private Vector2Int minBounds;
     private Vector2Int maxBounds;
     private FoodSpawner foodSpawner;
@@ -23,24 +28,29 @@ public class Snake : MonoBehaviour
         
         PositionSnakeOnAwake();
         
-        Debug.Log("Awake");
+        //Debug.Log("Awake");
     }
     private void PositionSnakeOnAwake()
     {
-        transform.position = boardGrid.Center;
+        snakePosition = new Vector2Int(Mathf.RoundToInt(boardGrid.Center.y), Mathf.RoundToInt(boardGrid.Center.x));
         snakeDirection = Vector2Int.up;
+
+        transform.position = new Vector3(
+            snakePosition.x,
+            snakePosition.y);
         
         //assign bounds for wrap screen
         minBounds = boardGrid.Min;
         maxBounds = boardGrid.Max;
+        
+        snakeMovePositionList = new List<Vector2Int>();
     }
 
     private void Start()
     {
+        snakeBodyList = new List<Transform>();
         foodSpawner = GameRef.instance.FoodSpawner.GetComponent<FoodSpawner>();
     }
-
-
 
     private void Update()
     {
@@ -56,15 +66,38 @@ public class Snake : MonoBehaviour
 
     private void MoveSnake()
     {
-        snakePosition += snakeDirection;
+        snakeDirection = nextDirection;
+        directionQueued = false;
         
+        previousHeadPosition = snakePosition;
+        snakePosition += snakeDirection;
         WrapPosition();
         
-        transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
-
+        snakeMovePositionList.Insert(0, previousHeadPosition);
+        
         transform.position = new Vector3(snakePosition.x, snakePosition.y);
-
+        transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
+        /*
+        Debug.Log(
+            $"Body parts: {snakeBodyList.Count}, " +
+            $"positions: {snakeMovePositionList.Count}"
+        );
+        */
+        for (int i = 0; i < snakeBodyList.Count; i++)
+        {
+            Vector2Int bodyPosition = snakeMovePositionList[i];
+    
+            snakeBodyList[i].position = new Vector3(bodyPosition.x, bodyPosition.y);
+            //Debug.Log("snakeBodyList:" + snakeBodyList.Count);
+        }
         CheckFoodCollision();
+
+        while (snakeMovePositionList.Count > snakeBodyList.Count)
+        {
+            snakeMovePositionList.RemoveAt(
+                snakeMovePositionList.Count - 1
+            );
+        }
     }
     private float GetAngleFromVector(Vector2 dir)
     {
@@ -75,40 +108,44 @@ public class Snake : MonoBehaviour
 
     private void HandleInput()
     {
+        if (directionQueued)
+            return;
+        
+        Vector2Int requestedDirection;
+        
         if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
         {
-            if (snakeDirection == Vector2Int.down)
-                return;
-            snakeDirection = Vector2Int.up;
+            requestedDirection = Vector2Int.up;
         }
-
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
         {
-            if (snakeDirection == Vector2Int.up)
-                return;
-            snakeDirection = Vector2Int.down;
+            requestedDirection = Vector2Int.down;
         }
-
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
-            if (snakeDirection == Vector2Int.right)
-                return;
-            snakeDirection = Vector2Int.left;
+            requestedDirection = Vector2Int.left;
         }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
-            if (snakeDirection == Vector2Int.left)
-                return;
-            snakeDirection = Vector2Int.right;
+            requestedDirection = Vector2Int.right;
         }
+        else
+        {
+            return;
+        }
+        
+        if (requestedDirection == -snakeDirection)
+            return;
+        nextDirection = requestedDirection;
+        
+        directionQueued = true;
 
         //Debug.Log("snake position:" + snakePosition);
     }
 
     private void CheckFoodCollision()
     {
-        if (foodSpawner.FoodGridPos == snakePosition)
+        if (foodSpawner.FoodPos == snakePosition)
         {
             EatFood();
             foodSpawner.Respawn();
@@ -117,9 +154,31 @@ public class Snake : MonoBehaviour
     private void EatFood()
     {
         //Add points
+        //Writen with AI starts
+        int newBodyIndex = snakeBodyList.Count;
+        
+        if (newBodyIndex >= snakeMovePositionList.Count)
+        {
+            Debug.LogError(
+                $"Missing body position. Body count: {snakeBodyList.Count}, " +
+                $"position count: {snakeMovePositionList.Count}"
+            );
+
+            return;
+        }
+
+        Vector2Int spawnPosition =
+            snakeMovePositionList[newBodyIndex];
+
+        GameObject newBodyPart = Instantiate(
+            snakeBodyPrefab,
+            new Vector3(spawnPosition.x, spawnPosition.y, 0f),
+            Quaternion.identity
+        );
+
+        snakeBodyList.Add(newBodyPart.transform);
         Debug.Log("EatFood");
     }
-   //Written with AI Start
     private void WrapPosition()
     {
         if (snakePosition.x < minBounds.x)

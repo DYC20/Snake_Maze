@@ -119,6 +119,59 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &195768315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 195768317}
+  - component: {fileID: 195768316}
+  m_Layer: 0
+  m_Name: ObjectSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &195768316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195768315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39913a02d5b163741b46f2343a33dd12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  indicatorprefab: {fileID: 3138998552919831436, guid: 3564e5c8bf7bfbd418548a89f507ea6b, type: 3}
+  indicatorDuration: 1
+  wallList:
+  - {fileID: 4577123700753185633, guid: 99d5e9f59fcb57e4ab6a2886027793c3, type: 3}
+  - {fileID: 5674947400739639528, guid: 50c2f29ca266f4e4a9ff2acf523b6831, type: 3}
+  - {fileID: 2506058201482204788, guid: f77d85a6b0463704990b37a2f606dd0d, type: 3}
+  wallSpawnTime: 3
+  endPoindOffset: {x: 50, y: 0}
+  indicatorEdgePadding: 0.05
+--- !u!4 &195768317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 195768315}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -23.75, y: -17.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &434696120
 GameObject:
   m_ObjectHideFlags: 0
@@ -528,6 +581,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameAssets
   snakeHeadSprite: {fileID: 253005588072490991, guid: 4d2f513021203314a86cd389f682f28a, type: 3}
+  snakeBodySprite: {fileID: 21300000, guid: 2c0e2020b37a3e24fa68f9e8e9d18c03, type: 3}
+  foodSprite: {fileID: 21300000, guid: 2c0e2020b37a3e24fa68f9e8e9d18c03, type: 3}
 --- !u!1 &1423515255
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,3 +739,4 @@ SceneRoots:
   - {fileID: 663536198}
   - {fileID: 1550338525}
   - {fileID: 434696122}
+  - {fileID: 195768317}
