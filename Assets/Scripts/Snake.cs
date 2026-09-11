@@ -9,30 +9,34 @@ public class Snake : MonoBehaviour
     private Vector2Int snakePosition;
     private Vector2Int snakeDirection;
     private float timer = 0f;
-    private Camera mainCamera;
+    //private Camera mainCamera;
     private Vector2Int minBounds;
     private Vector2Int maxBounds;
     private FoodSpawner foodSpawner;
+    private BoardGrid boardGrid;
+    private GameRef gameRef;
 
     private void Awake()
     {
-        if (background == null)
-            background = GameRef.instance.Background;
+        gameRef = GameRef.instance;
+        boardGrid = gameRef.BoardGrid.GetComponent<BoardGrid>();
         
         PositionSnakeOnAwake();
-        snakeDirection = Vector2Int.up;
+        
         Debug.Log("Awake");
     }
     private void PositionSnakeOnAwake()
     {
-        snakePosition = new Vector2Int(Mathf.RoundToInt(background.transform.position.x),
-            Mathf.RoundToInt(background.transform.position.y));
+        transform.position = boardGrid.Center;
+        snakeDirection = Vector2Int.up;
+        
+        //assign bounds for wrap screen
+        minBounds = boardGrid.Min;
+        maxBounds = boardGrid.Max;
     }
 
     private void Start()
     {
-        mainCamera = Camera.main;
-        CameraBounds();
         foodSpawner = GameRef.instance.FoodSpawner.GetComponent<FoodSpawner>();
     }
 
@@ -45,9 +49,28 @@ public class Snake : MonoBehaviour
         if ( timer >= timerMax )
         {
             //move snake in direction
-            snakePosition += snakeDirection;
             timer -= timerMax;
+            MoveSnake();
         }
+    }
+
+    private void MoveSnake()
+    {
+        snakePosition += snakeDirection;
+        
+        WrapPosition();
+        
+        transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
+
+        transform.position = new Vector3(snakePosition.x, snakePosition.y);
+
+        CheckFoodCollision();
+    }
+    private float GetAngleFromVector(Vector2 dir)
+    {
+        float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (n < 0) n += 360;
+        return n;
     }
 
     private void HandleInput()
@@ -80,13 +103,6 @@ public class Snake : MonoBehaviour
             snakeDirection = Vector2Int.right;
         }
 
-        WrapPosition();
-        
-        transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
-
-        transform.position = new Vector3(snakePosition.x, snakePosition.y);
-
-        CheckFoodCollision();
         //Debug.Log("snake position:" + snakePosition);
     }
 
@@ -97,37 +113,13 @@ public class Snake : MonoBehaviour
             EatFood();
             foodSpawner.Respawn();
         }
-        
     }
-
-    private float GetAngleFromVector(Vector2 dir)
+    private void EatFood()
     {
-        float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        if (n < 0) n += 360;
-        return n;
+        //Add points
+        Debug.Log("EatFood");
     }
-
-    private void CameraBounds()
-    {
-        //Written with AI Start
-        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(
-            new Vector3(0f, 0f, -mainCamera.transform.position.z)
-        );
-
-        Vector3 topRight = mainCamera.ViewportToWorldPoint(
-            new Vector3(1f, 1f, -mainCamera.transform.position.z)
-        );
-
-        minBounds = new Vector2Int(
-            Mathf.CeilToInt(bottomLeft.x),
-            Mathf.CeilToInt(bottomLeft.y)
-        );
-
-        maxBounds = new Vector2Int(
-            Mathf.FloorToInt(topRight.x),
-            Mathf.FloorToInt(topRight.y)
-        );
-    }
+   //Written with AI Start
     private void WrapPosition()
     {
         if (snakePosition.x < minBounds.x)
@@ -149,13 +141,4 @@ public class Snake : MonoBehaviour
         }
         //Written with AI Ends
     }
-
-    private void EatFood()
-    {
-        //Add points
-        Debug.Log("EatFood");
-    }
-
-
-
 }

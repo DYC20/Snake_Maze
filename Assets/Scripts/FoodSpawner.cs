@@ -10,10 +10,11 @@ public class FoodSpawner : MonoBehaviour
 
     public float FoodLifetime => foodLifetime;
 
-    private Camera mainCamera;
+    //private Camera mainCamera;
     private GameObject food;
     //private GameObject background;
     private float foodTimer;
+    private GameRef gameRef;
 
     public float FoodTimer
     {
@@ -22,15 +23,19 @@ public class FoodSpawner : MonoBehaviour
     }
     private Vector2Int posGridmin;
     private Vector2Int posGridmax;
-    private Vector2Int foodGrid;
+    private Vector2Int minBounds;
+    private Vector2Int maxBounds;
     private Vector2Int foodGridPos;
     public Vector2Int FoodGridPos => foodGridPos;
 
 
     private void Start()
     {
-        mainCamera = Camera.main;
-        //background = GameRef.instance.Background;
+        gameRef = GameRef.instance;
+        maxBounds = gameRef.BoardGrid.GetComponent<BoardGrid>().Max;
+        minBounds = gameRef.BoardGrid.GetComponent<BoardGrid>().Min;
+        
+
         CreateGrid();
         SpawnFood();
     }
@@ -63,15 +68,8 @@ public class FoodSpawner : MonoBehaviour
 
     private void CreateGrid()
     {
-        //Find Vector2 bounds
-        Vector3 bottomLeft = mainCamera.ViewportToWorldPoint(
-            new Vector3(0f, 0f, -mainCamera.transform.position.z));
-        Vector3 topRight = mainCamera.ViewportToWorldPoint(
-            new Vector3(1f, 1f, -mainCamera.transform.position.z));
-        
-        posGridmax = new Vector2Int(Mathf.FloorToInt(topRight.x - 0.5f), Mathf.FloorToInt(topRight.y - 0.5f));
-        posGridmin = new Vector2Int(Mathf.CeilToInt(bottomLeft.x + 0.5f), Mathf.CeilToInt(bottomLeft.y + 0.5f));
-
+        posGridmax = new Vector2Int(Mathf.FloorToInt(maxBounds.x - 0.5f), Mathf.FloorToInt(maxBounds.y - 0.5f));
+        posGridmin = new Vector2Int(Mathf.CeilToInt(minBounds.x + 0.5f), Mathf.CeilToInt(minBounds.y + 0.5f));
     }
   
     //Helper | Written with AI

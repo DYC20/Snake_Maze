@@ -5,14 +5,16 @@ public class GameRef : MonoBehaviour
     public static GameRef instance;
     
     //Available References
-    [SerializeField] GameObject background;
-    [SerializeField] GameObject snakeBodyPrefab;
+    [SerializeField] private GameObject background;
+    [SerializeField] private GameObject snakeBodyPrefab;
     [SerializeField] private GameObject foodSpawner;
+    [SerializeField] private GameObject boardGrid;
     
     //Getters
     public GameObject Background => background;
     public GameObject SnakeBodyPrefab => snakeBodyPrefab;
     public GameObject FoodSpawner => foodSpawner;
+    public GameObject BoardGrid => boardGrid;
 
     private void Awake()
     {

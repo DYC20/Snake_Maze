@@ -3,25 +3,29 @@ using UnityEngine;
 
 public class Background : MonoBehaviour
 {
-    private Camera mainCamera;
-    private Vector2Int screenBounds;
-    
-    public Vector2Int ScreenBounds => screenBounds;
+    private GameRef gameRef;
+    private BoardGrid boardGrid;
+    private float gridWidth;
+    private float gridHeight;
 
     private void Awake()
     {
+        gameRef = GameRef.instance;
+        boardGrid = gameRef.BoardGrid.GetComponent<BoardGrid>();
+    }
+    
+    private void Start()
+    {
         GetScreenBounds();
     }
-
+    
     private void GetScreenBounds()
     {
-        mainCamera = Camera.main;
-        float cameraHeight = mainCamera.orthographicSize * 2f;
-        float cameraWidth = mainCamera.aspect * cameraHeight;
+        gridWidth = boardGrid.Max.x - boardGrid.Min.x + 1f;
+        gridHeight = boardGrid.Max.y - boardGrid.Min.y;
         
-        //Set BG scale &position
-        transform.localScale = new Vector3(cameraWidth, cameraHeight, 1f);
-        transform.transform.position = new Vector3(cameraWidth / 2f - cameraWidth / 2f, cameraHeight / 2f - cameraHeight /2f, 0f);
+        //Set BG scale & position
+        transform.localScale = new Vector3(gridWidth, gridHeight, 1f);
+        transform.transform.position = boardGrid.Center;
     }
-
 }
