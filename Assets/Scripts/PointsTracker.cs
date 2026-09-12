@@ -1,40 +1,54 @@
 using UnityEngine;
+using TMPro;
 
 public class PointsTracker : MonoBehaviour
 {
-    [SerializeField] private int pointsValue;
-    private int points;
-    private int hieghestPoints;
+    [SerializeField] private float scoreValue;
+    [SerializeField] private TextMeshProUGUI scoreText;
+    [SerializeField] private TextMeshProUGUI highScoreText;
+    //private float currentScore;
+    //private float currentHighScore;
+    private float score;
+    private float hieghestScore;
     void Start()
     {
-        hieghestPoints = points;
+        hieghestScore = score;
         Debug.Log("Points Tracker Started");
+    }
+
+    private void UpdateScore()
+    {
+        scoreText.SetText("Score: {0}", score);
+        highScoreText.SetText("High Score: {0}", hieghestScore);
     }
 
     public void AddPoints()
     {
-        points += pointsValue;
-        if (points > hieghestPoints)
+        score += scoreValue;
+        if (score > hieghestScore)
             HieghestPoints();
-            
-        Debug.Log("Points: " + points);
-        Debug.Log("hieghestPoints: " + hieghestPoints);
+
+        UpdateScore();
+        Debug.Log("Points: " + score);
+        Debug.Log("hieghestPoints: " + hieghestScore);
     }
 
     private void HieghestPoints()
     {
-        int pointsToAdd = points - hieghestPoints;
-        hieghestPoints += pointsToAdd;
+        float scoreToAdd = score - hieghestScore;
+        hieghestScore += scoreToAdd;
     }
 
     public void RemovePoints()
     {
-        points -= pointsValue;
-        Debug.Log("Points: " + points);
+        score -= scoreValue;
+        UpdateScore();
+        Debug.Log("Points: " + score);
     }
 
     public void ResetPoints()
     {
-        points = 0;
+        score = 0;
+        UpdateScore();
     }
 }
