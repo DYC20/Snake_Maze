@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4630185313687420035}
   - component: {fileID: 4088593000326193051}
+  - component: {fileID: 2141670343321464921}
   - component: {fileID: 5180768433509869553}
   - component: {fileID: 2151037363096726069}
   m_Layer: 3
@@ -50,6 +51,19 @@ MonoBehaviour:
   movemantSpeed: 2.5
   speedIncrease: 0
   snakeBodyPrefab: {fileID: 1792063327127003922, guid: 6c640e12756cb85478bf4e4f3124ab34, type: 3}
+--- !u!114 &2141670343321464921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1655058130158388045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c7ecf0ff27bbf41a924cf5541f5e5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PointsTracker
+  pointsValue: 10
 --- !u!50 &5180768433509869553
 Rigidbody2D:
   serializedVersion: 5

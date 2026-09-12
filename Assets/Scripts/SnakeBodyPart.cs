@@ -15,8 +15,8 @@ public class SnakeBodyPart : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            Debug.Log("Body Hit:" + collision.gameObject.name);
-            Debug.Log("this GO: " + gameObject);
+            //Debug.Log("Body Hit:" + collision.gameObject.name);
+            //Debug.Log("this GO: " + gameObject);
             snake.RemoveBodyPart(gameObject.GetComponent<SnakeBodyPart>());
         }
     }

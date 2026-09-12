@@ -22,6 +22,7 @@ public class Snake : MonoBehaviour
     private BoardGrid boardGrid;
     private WallSpawner wallSpawner;
     private GameRef gameRef;
+    private PointsTracker pointsTracker;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class Snake : MonoBehaviour
     {
         timer = 1f / movemantSpeed;
         snakeBodyList = new List<Transform>();
+        pointsTracker = GetComponent<PointsTracker>();
         foodSpawner = gameRef.FoodSpawner.GetComponent<FoodSpawner>();
         wallSpawner = gameRef.WallSpawner.GetComponent<WallSpawner>();
     }
@@ -159,7 +161,7 @@ public class Snake : MonoBehaviour
             snakeBodyList[i].position = new Vector3(bodyPosition.x, bodyPosition.y);
             //Debug.Log("snakeBodyList:" + snakeBodyList.Count);
         }
-        CheckFoodCollision();
+        CheckPosCollision();
 
         while (snakeMovePositionList.Count > snakeBodyList.Count)
         {
@@ -169,18 +171,38 @@ public class Snake : MonoBehaviour
         }
     }
 
-    private void CheckFoodCollision()
+    private void CheckPosCollision()
     {
         if (foodSpawner.FoodPos == snakePosition)
         {
             EatFood();
             foodSpawner.Respawn();
         }
+
+        foreach (var snakeBodyTran in snakeBodyList)
+        {
+            Vector2Int vec2SnakeBodyTran = new Vector2Int(Mathf.RoundToInt
+                (snakeBodyTran.position.x), Mathf.RoundToInt(snakeBodyTran.position.y));
+            if (vec2SnakeBodyTran == snakePosition)
+                DestroySnake();
+        }
+        
     }
+
+    private void DestroySnake()
+    {
+        Debug.Log("Snake destroyed");
+        foreach (var snakeBodyTran in snakeBodyList)
+        {
+            Destroy(snakeBodyTran.gameObject);
+        }
+        Destroy(gameObject);
+    }
+
     private void EatFood()
     {
         //Add points
-        
+        pointsTracker.AddPoints();
         //Increase speed
         movemantSpeed += speedIncrease;
         wallSpawner.WallSpawnTime -= speedIncrease;
@@ -205,31 +227,31 @@ public class Snake : MonoBehaviour
             new Vector3(spawnPosition.x, spawnPosition.y, 0f),
             Quaternion.identity
         );
-        //SnakeBodyPart snakeBodyPart = newBodyPart.GetComponent<SnakeBodyPart>();
 
         snakeBodyList.Add(newBodyPart.transform);
         SnakeBodyPart body = newBodyPart.GetComponent<SnakeBodyPart>();
 
         body.Initialize(this);
         
-        Debug.Log("Body count: " + snakeBodyList.Count);
-        Debug.Log("EatFood");
+        //Debug.Log("Body count: " + snakeBodyList.Count);
+        //Debug.Log("EatFood");
     }
     //Written with AI end
     public void RemoveBodyPart(SnakeBodyPart bodyPart)
     {
         int hitIndex = snakeBodyList.IndexOf(bodyPart.transform);
-        Debug.Log("hitIndex: " + hitIndex);
+        //Debug.Log("hitIndex: " + hitIndex);
         if (hitIndex < 0)
             return;
-        Debug.Log("Hit Index:" + hitIndex);
-        Debug.Log("snake body count:" + snakeBodyList.Count);
+        //Debug.Log("Hit Index:" + hitIndex);
+        //Debug.Log("snake body count:" + snakeBodyList.Count);
         
         for (int i = snakeBodyList.Count - 1; i >= hitIndex; i--)
         {
-            Debug.Log("i:" + snakeBodyList[i]);
+            //Debug.Log("i:" + snakeBodyList[i]);
             Destroy(snakeBodyList[i].gameObject);
             snakeBodyList.RemoveAt(i);
+            pointsTracker.RemovePoints();
         }
 
         while (snakeMovePositionList.Count > snakeBodyList.Count)
@@ -243,6 +265,7 @@ public class Snake : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             //snake loose health | dies
+            DestroySnake();
             Debug.Log("Head Hit Wall");
         }
     }
