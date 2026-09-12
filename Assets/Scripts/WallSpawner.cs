@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectSpawner : MonoBehaviour
+public class WallSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject indicatorprefab;
     [SerializeField] private float indicatorDuration;
@@ -21,6 +21,8 @@ public class ObjectSpawner : MonoBehaviour
     private Quaternion wallRotation;
     private bool isSpawning;
     private Vector3 indicatorSpawnPosition;
+    private List<GameObject> liveWallsList = new List<GameObject>();
+    public List<GameObject> LiveWallsList => liveWallsList;
     
     private void Awake()
     {
@@ -73,6 +75,12 @@ public class ObjectSpawner : MonoBehaviour
         //indicator.GetComponent<IndicatorManager>().DestroyIndicator;
         
         wall = Instantiate(wallToSpawn, new Vector3(wallPos.x, wallPos.y), wallRotation);
+
+        for (int i = 0; i < liveWallsList.Count; i++)
+        {
+            liveWallsList.Add(wall);
+        }
+        
         isSpawning = false;
         wallTimer = 0;
     }

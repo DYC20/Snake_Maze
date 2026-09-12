@@ -9,6 +9,7 @@ public class GameRef : MonoBehaviour
     [SerializeField] private GameObject snakeBodyPrefab;
     [SerializeField] private GameObject foodSpawner;
     [SerializeField] private GameObject boardGrid;
+    [SerializeField] private GameObject wallSpawner;
     
     //Getters
     public GameObject Background => background;
