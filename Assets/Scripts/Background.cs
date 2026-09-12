@@ -11,7 +11,7 @@ public class Background : MonoBehaviour
     private void Awake()
     {
         gameRef = GameRef.instance;
-        boardGrid = gameRef.BoardGrid.GetComponent<BoardGrid>();
+        boardGrid = gameRef.BoardGrid;
     }
     
     private void Start()

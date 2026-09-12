@@ -9,7 +9,12 @@ public class FoodSpawner : MonoBehaviour
     [SerializeField] private float foodLifetime = 3f;
 
     public float FoodLifetime => foodLifetime;
+    bool notFirstSpawn = false;
+    public bool NotFirstSpawn  {get => notFirstSpawn; set => notFirstSpawn = value; }
+    
 
+    private bool gameStarted = false;
+    public bool GameStarted { get => gameStarted; set => gameStarted = value; }
     //private Camera mainCamera;
     private GameObject food;
     //private GameObject background;
@@ -32,17 +37,26 @@ public class FoodSpawner : MonoBehaviour
     private void Start()
     {
         gameRef = GameRef.instance;
-        maxBounds = gameRef.BoardGrid.GetComponent<BoardGrid>().Max;
-        minBounds = gameRef.BoardGrid.GetComponent<BoardGrid>().Min;
-        
-
+        maxBounds = gameRef.BoardGrid.Max;
+        minBounds = gameRef.BoardGrid.Min;
         CreateGrid();
-        SpawnFood();
+    }
+    private void FirstSpawn()
+    {
+        if (!notFirstSpawn)
+        {
+            Respawn();
+        }
+        notFirstSpawn = true;
     }
 
     private void Update()
     {
-        FoodCycle();
+        if (gameStarted)
+        {
+            FirstSpawn();
+            FoodCycle();
+        }
     }
     private void SpawnFood()
      {

@@ -8,20 +8,33 @@ public class PointsTracker : MonoBehaviour
     void Start()
     {
         hieghestPoints = points;
+        Debug.Log("Points Tracker Started");
     }
 
     public void AddPoints()
     {
         points += pointsValue;
         if (points > hieghestPoints)
-            hieghestPoints = points;
+            HieghestPoints();
+            
         Debug.Log("Points: " + points);
         Debug.Log("hieghestPoints: " + hieghestPoints);
+    }
+
+    private void HieghestPoints()
+    {
+        int pointsToAdd = points - hieghestPoints;
+        hieghestPoints += pointsToAdd;
     }
 
     public void RemovePoints()
     {
         points -= pointsValue;
         Debug.Log("Points: " + points);
+    }
+
+    public void ResetPoints()
+    {
+        points = 0;
     }
 }

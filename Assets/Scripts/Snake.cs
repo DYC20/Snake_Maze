@@ -8,6 +8,7 @@ public class Snake : MonoBehaviour
     [SerializeField] private float movemantSpeed = 1f;
     [SerializeField] private float speedIncrease = 0.1f;
     [SerializeField] private GameObject snakeBodyPrefab;
+    
     private Vector2Int snakePosition;
     private Vector2Int previousHeadPosition;
     private Vector2Int nextDirection = Vector2Int.up;
@@ -15,14 +16,18 @@ public class Snake : MonoBehaviour
     private Vector2Int snakeDirection;
     private List<Vector2Int> snakeMovePositionList; 
     private List<Transform> snakeBodyList;
-    private float timer = 0f;
+    private float timer;
     private Vector2Int minBounds;
     private Vector2Int maxBounds;
     private FoodSpawner foodSpawner;
     private BoardGrid boardGrid;
     private WallSpawner wallSpawner;
+    public WallSpawner WallSpawner{set => wallSpawner = value;}
     private GameRef gameRef;
     private PointsTracker pointsTracker;
+    public PointsTracker PointsTracker {set => pointsTracker = value; }
+    private Canvas endGameCanvas;
+    public Canvas EndGameCanvas { set => endGameCanvas = value; }
 
     private void Awake()
     {
@@ -53,7 +58,6 @@ public class Snake : MonoBehaviour
     {
         timer = 1f / movemantSpeed;
         snakeBodyList = new List<Transform>();
-        pointsTracker = GetComponent<PointsTracker>();
         foodSpawner = gameRef.FoodSpawner.GetComponent<FoodSpawner>();
         wallSpawner = gameRef.WallSpawner.GetComponent<WallSpawner>();
     }
@@ -192,6 +196,9 @@ public class Snake : MonoBehaviour
     private void DestroySnake()
     {
         Debug.Log("Snake destroyed");
+        pointsTracker.ResetPoints();
+        gameRef.GameHandler.GameEnd();
+        endGameCanvas.gameObject.SetActive(true);
         foreach (var snakeBodyTran in snakeBodyList)
         {
             Destroy(snakeBodyTran.gameObject);

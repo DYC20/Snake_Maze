@@ -10,7 +10,9 @@ public class WallSpawner : MonoBehaviour
     [SerializeField] private float wallSpawnTime = 3f;
     [SerializeField] private Vector2Int endPoindOffset;
     [SerializeField, Range(0f, 0.2f)] private float indicatorEdgePadding = 0.05f;
-    
+
+    private bool gameStarted = false;
+    public bool GameStarted {get => gameStarted; set => gameStarted = value; }
     private Camera mainCamera;
     private Vector2Int posMax;
     private Vector2Int posMin;
@@ -36,7 +38,8 @@ public class WallSpawner : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        WallCycle();
+        if (gameStarted)
+            WallCycle();
     }
 
     private void WallCycle()
@@ -84,6 +87,17 @@ public class WallSpawner : MonoBehaviour
         
         isSpawning = false;
         wallTimer = 0;
+    }
+
+    public void DestroyWalls()
+    {
+        Debug.Log($"Destroying {liveWallsList.Count} walls");
+        for (int i = liveWallsList.Count - 1; i >= 0; i--)
+        {
+            GameObject wallToDestroy = liveWallsList[i];
+            liveWallsList.Remove(wallToDestroy);
+            Destroy(wallToDestroy);
+        }
     }
 
     //Writen with AI starts

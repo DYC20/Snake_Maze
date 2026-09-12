@@ -5,20 +5,22 @@ public class GameRef : MonoBehaviour
     public static GameRef instance;
     
     //Available References
-    [SerializeField] private GameObject snake;
-    [SerializeField] private GameObject background;
+    [SerializeField] private Snake snake;
+    [SerializeField] private Background background;
     [SerializeField] private GameObject snakeBodyPrefab;
-    [SerializeField] private GameObject foodSpawner;
-    [SerializeField] private GameObject boardGrid;
-    [SerializeField] private GameObject wallSpawner;
+    [SerializeField] private FoodSpawner foodSpawner;
+    [SerializeField] private BoardGrid boardGrid;
+    [SerializeField] private WallSpawner wallSpawner;
+    [SerializeField] private GameHandler gameHandler;
     
     //Getters
-    public GameObject Snake => snake;
-    public GameObject Background => background;
+    public Snake Snake => snake;
+    public Background Background => background;
     public GameObject SnakeBodyPrefab => snakeBodyPrefab;
-    public GameObject FoodSpawner => foodSpawner;
-    public GameObject BoardGrid => boardGrid;
-    public GameObject WallSpawner => wallSpawner;
+    public FoodSpawner FoodSpawner => foodSpawner;
+    public BoardGrid BoardGrid => boardGrid;
+    public WallSpawner WallSpawner => wallSpawner;
+    public GameHandler GameHandler => gameHandler;
 
     private void Awake()
     {

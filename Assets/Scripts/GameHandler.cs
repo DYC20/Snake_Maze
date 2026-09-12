@@ -1,21 +1,50 @@
+using System;
 using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
  [SerializeField] private GameObject snakePrefab;
-    void Start()
+ [SerializeField] private PointsTracker pointsTracker;
+ [SerializeField] private WallSpawner wallSpawner;
+ [SerializeField] private FoodSpawner foodSpawner;
+ [SerializeField] private Canvas startGameCanvas;
+ [SerializeField] private Canvas endGameCanvas;
+ 
+ private Snake snake;
+
+ private void Start()
+ {
+     
+ }
+
+ public void StartGame()
     {
         //Assign and create snake OB
         GameObject snakeHeadObj = Instantiate(snakePrefab);
         SpriteRenderer snakeSpriteRenderer =  snakeHeadObj.GetComponent<SpriteRenderer>();
-
+        snake = snakeHeadObj.GetComponent<Snake>();
+        snake.EndGameCanvas = endGameCanvas;
+        snake.PointsTracker = pointsTracker;
+        snake.WallSpawner = wallSpawner;
         if (snakeSpriteRenderer == null)
         {
             snakeSpriteRenderer = snakeHeadObj.AddComponent<SpriteRenderer>();
             snakeSpriteRenderer.sprite = GameAssets.instance.snakeHeadSprite;
         }
-        
+        wallSpawner.DestroyWalls();
+        wallSpawner.GameStarted = true;
+        foodSpawner.GameStarted = true;
+        foodSpawner.NotFirstSpawn = false;
+        startGameCanvas.gameObject.SetActive(false);
+        endGameCanvas.gameObject.SetActive(false);
     }
+
+    public void GameEnd()
+    {
+        wallSpawner.GameStarted = false;
+        foodSpawner.GameStarted = false;
+    }
+    
 
     // Update is called once per frame
     void Update()
