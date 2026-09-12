@@ -20,6 +20,7 @@ public class Snake : MonoBehaviour
     private Vector2Int maxBounds;
     private FoodSpawner foodSpawner;
     private BoardGrid boardGrid;
+    private WallSpawner wallSpawner;
     private GameRef gameRef;
 
     private void Awake()
@@ -33,7 +34,7 @@ public class Snake : MonoBehaviour
     }
     private void PositionSnakeOnAwake()
     {
-        snakePosition = new Vector2Int(Mathf.RoundToInt(boardGrid.Center.y), Mathf.RoundToInt(boardGrid.Center.x));
+        snakePosition = new Vector2Int(Mathf.RoundToInt(boardGrid.Center.x), Mathf.RoundToInt(boardGrid.Center.y));
         snakeDirection = Vector2Int.up;
 
         transform.position = new Vector3(
@@ -51,7 +52,8 @@ public class Snake : MonoBehaviour
     {
         timer = 1f / movemantSpeed;
         snakeBodyList = new List<Transform>();
-        foodSpawner = GameRef.instance.FoodSpawner.GetComponent<FoodSpawner>();
+        foodSpawner = gameRef.FoodSpawner.GetComponent<FoodSpawner>();
+        wallSpawner = gameRef.WallSpawner.GetComponent<WallSpawner>();
     }
 
     private void Update()
@@ -66,41 +68,6 @@ public class Snake : MonoBehaviour
         }
     }
 
-    private void MoveSnake()
-    {
-        snakeDirection = nextDirection;
-        directionQueued = false;
-        
-        previousHeadPosition = snakePosition;
-        snakePosition += snakeDirection;
-        WrapPosition();
-        
-        snakeMovePositionList.Insert(0, previousHeadPosition);
-        
-        transform.position = new Vector3(snakePosition.x, snakePosition.y);
-        transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
-        /*
-        Debug.Log(
-            $"Body parts: {snakeBodyList.Count}, " +
-            $"positions: {snakeMovePositionList.Count}"
-        );
-        */
-        for (int i = 0; i < snakeBodyList.Count; i++)
-        {
-            Vector2Int bodyPosition = snakeMovePositionList[i];
-    
-            snakeBodyList[i].position = new Vector3(bodyPosition.x, bodyPosition.y);
-            //Debug.Log("snakeBodyList:" + snakeBodyList.Count);
-        }
-        CheckFoodCollision();
-
-        while (snakeMovePositionList.Count > snakeBodyList.Count)
-        {
-            snakeMovePositionList.RemoveAt(
-                snakeMovePositionList.Count - 1
-            );
-        }
-    }
     private float GetAngleFromVector(Vector2 dir)
     {
         float n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
@@ -144,6 +111,63 @@ public class Snake : MonoBehaviour
 
         //Debug.Log("snake position:" + snakePosition);
     }
+    //Written with AI start
+    private void WrapPosition()
+    {
+        if (snakePosition.x < minBounds.x)
+        {
+            snakePosition.x = maxBounds.x;
+        }
+        else if (snakePosition.x > maxBounds.x)
+        {
+            snakePosition.x = minBounds.x;
+        }
+
+        if (snakePosition.y < minBounds.y)
+        {
+            snakePosition.y = maxBounds.y;
+        }
+        else if (snakePosition.y > maxBounds.y)
+        {
+            snakePosition.y = minBounds.y;
+        }
+        //Written with AI End
+    }
+    private void MoveSnake()
+    {
+        snakeDirection = nextDirection;
+        directionQueued = false;
+        
+        previousHeadPosition = snakePosition;
+        snakePosition += snakeDirection;
+        WrapPosition();
+        
+        snakeMovePositionList.Insert(0, previousHeadPosition);
+        
+        transform.position = new Vector3(snakePosition.x, snakePosition.y);
+        transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
+        /*
+        Debug.Log(
+            $"Body parts: {snakeBodyList.Count}, " +
+            $"positions: {snakeMovePositionList.Count}"
+        );
+        */
+        for (int i = 0; i < snakeBodyList.Count; i++)
+        {
+            Vector2Int bodyPosition = snakeMovePositionList[i];
+    
+            snakeBodyList[i].position = new Vector3(bodyPosition.x, bodyPosition.y);
+            //Debug.Log("snakeBodyList:" + snakeBodyList.Count);
+        }
+        CheckFoodCollision();
+
+        while (snakeMovePositionList.Count > snakeBodyList.Count)
+        {
+            snakeMovePositionList.RemoveAt(
+                snakeMovePositionList.Count - 1
+            );
+        }
+    }
 
     private void CheckFoodCollision()
     {
@@ -159,7 +183,8 @@ public class Snake : MonoBehaviour
         
         //Increase speed
         movemantSpeed += speedIncrease;
-        //Written with AI starts
+        wallSpawner.WallSpawnTime -= speedIncrease;
+        //Written with AI start
         int newBodyIndex = snakeBodyList.Count;
         
         if (newBodyIndex >= snakeMovePositionList.Count)
@@ -180,29 +205,46 @@ public class Snake : MonoBehaviour
             new Vector3(spawnPosition.x, spawnPosition.y, 0f),
             Quaternion.identity
         );
+        //SnakeBodyPart snakeBodyPart = newBodyPart.GetComponent<SnakeBodyPart>();
 
         snakeBodyList.Add(newBodyPart.transform);
+        SnakeBodyPart body = newBodyPart.GetComponent<SnakeBodyPart>();
+
+        body.Initialize(this);
+        
+        Debug.Log("Body count: " + snakeBodyList.Count);
         Debug.Log("EatFood");
     }
-    private void WrapPosition()
+    //Written with AI end
+    public void RemoveBodyPart(SnakeBodyPart bodyPart)
     {
-        if (snakePosition.x < minBounds.x)
+        int hitIndex = snakeBodyList.IndexOf(bodyPart.transform);
+        Debug.Log("hitIndex: " + hitIndex);
+        if (hitIndex < 0)
+            return;
+        Debug.Log("Hit Index:" + hitIndex);
+        Debug.Log("snake body count:" + snakeBodyList.Count);
+        
+        for (int i = snakeBodyList.Count - 1; i >= hitIndex; i--)
         {
-            snakePosition.x = maxBounds.x;
-        }
-        else if (snakePosition.x > maxBounds.x)
-        {
-            snakePosition.x = minBounds.x;
+            Debug.Log("i:" + snakeBodyList[i]);
+            Destroy(snakeBodyList[i].gameObject);
+            snakeBodyList.RemoveAt(i);
         }
 
-        if (snakePosition.y < minBounds.y)
+        while (snakeMovePositionList.Count > snakeBodyList.Count)
         {
-            snakePosition.y = maxBounds.y;
+            snakeMovePositionList.RemoveAt(snakeMovePositionList.Count -1);
         }
-        else if (snakePosition.y > maxBounds.y)
-        {
-            snakePosition.y = minBounds.y;
-        }
-        //Written with AI Ends
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            //snake loose health | dies
+            Debug.Log("Head Hit Wall");
+        }
+    }
+    
 }

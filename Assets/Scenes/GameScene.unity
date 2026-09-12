@@ -130,7 +130,7 @@ GameObject:
   - component: {fileID: 195768317}
   - component: {fileID: 195768316}
   m_Layer: 0
-  m_Name: ObjectSpawner
+  m_Name: WallSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,9 +152,7 @@ MonoBehaviour:
   indicatorDuration: 1
   wallList:
   - {fileID: 4577123700753185633, guid: 99d5e9f59fcb57e4ab6a2886027793c3, type: 3}
-  - {fileID: 5674947400739639528, guid: 50c2f29ca266f4e4a9ff2acf523b6831, type: 3}
-  - {fileID: 2506058201482204788, guid: f77d85a6b0463704990b37a2f606dd0d, type: 3}
-  wallSpawnTime: 3
+  wallSpawnTime: 5
   endPoindOffset: {x: 50, y: 0}
   indicatorEdgePadding: 0.05
 --- !u!4 &195768317
@@ -202,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   foodPrefab: {fileID: 3443883044627142788, guid: 9221404de78b69d468ffd1f4fb7b4164, type: 3}
-  foodLifetime: 10
+  foodLifetime: 30
 --- !u!4 &434696122
 Transform:
   m_ObjectHideFlags: 0
@@ -483,10 +481,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c5d0e9c1b7cb949a4b00102d9315ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  snake: {fileID: 1655058130158388045, guid: 9539a0a1669880c4bbc2bebab8c9cc96, type: 3}
   background: {fileID: 1550338523}
   snakeBodyPrefab: {fileID: 1792063327127003922, guid: 6c640e12756cb85478bf4e4f3124ab34, type: 3}
   foodSpawner: {fileID: 434696120}
   boardGrid: {fileID: 1423515255}
+  wallSpawner: {fileID: 195768315}
 --- !u!1 &663536196
 GameObject:
   m_ObjectHideFlags: 0

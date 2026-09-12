@@ -23,6 +23,7 @@ public class WallSpawner : MonoBehaviour
     private Vector3 indicatorSpawnPosition;
     private List<GameObject> liveWallsList = new List<GameObject>();
     public List<GameObject> LiveWallsList => liveWallsList;
+    public float WallSpawnTime{get => wallSpawnTime; set => wallSpawnTime = value;}
     
     private void Awake()
     {
