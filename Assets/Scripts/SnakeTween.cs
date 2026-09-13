@@ -9,6 +9,7 @@ public class SnakeTween : MonoBehaviour
     [SerializeField] private float eatEndScale;
     [SerializeField] private float eatDuration;
     [SerializeField] private Ease eatEase;
+    [SerializeField] private Color eatColor;
     private float delayBetweenTweens;
     private SpriteRenderer sp;
     public float DelayBetweenTweens => delayBetweenTweens;
@@ -35,7 +36,7 @@ public class SnakeTween : MonoBehaviour
             .DOScale(eatEndScale, eatDuration)
             .SetEase(eatEase)
             .SetLoops(2, LoopType.Yoyo));
-        seq.Join(sp.DOColor(Color.white, eatDuration)
+        seq.Join(sp.DOColor(eatColor, eatDuration)
             .SetEase(eatEase)
             .SetLoops(2, LoopType.Yoyo));
         

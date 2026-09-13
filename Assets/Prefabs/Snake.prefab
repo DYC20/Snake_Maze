@@ -66,6 +66,7 @@ MonoBehaviour:
   eatEndScale: 1.2
   eatDuration: 0.1
   eatEase: 31
+  eatColor: {r: 0.9748427, g: 0.523547, b: 0.5180767, a: 1}
 --- !u!50 &5180768433509869553
 Rigidbody2D:
   serializedVersion: 5
@@ -212,7 +213,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 561e4d5787da3314690918a05c853de6, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.17012769, g: 0.28930807, b: 0.1771383, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
