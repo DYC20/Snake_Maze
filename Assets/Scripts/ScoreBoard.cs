@@ -22,8 +22,6 @@ public class ScoreBoard : MonoBehaviour
     {
         rectTransform = GetComponent<RectTransform>();
         lockedY = rectTransform.anchoredPosition.y;
-        maxBounds = gameRef.BoardGrid.Max;
-        minBounds = gameRef.BoardGrid.Min;
     }
 
     // Update is called once per frame
@@ -37,12 +35,14 @@ public class ScoreBoard : MonoBehaviour
         Vector3 nextPosition = 
             new Vector3(newPosition.x, lockedY);
         Tween moveBoardTween = 
-            rectTransform.DOMove(transform.position + nextPosition, .1f);
+            rectTransform.DOMove(nextPosition, .1f);
         Debug.LogWarning("Moving score board");
     }
 
     private void FindNewPosition()
     {
+        maxBounds = gameRef.BoardGrid.Max;
+        minBounds = gameRef.BoardGrid.Min;
         newPosition = new Vector3(Random.Range(minBounds.x, maxBounds.x), 
             Random.Range(minBounds.y, maxBounds.y));
     }
