@@ -19,6 +19,7 @@ public class Snake : MonoBehaviour
     private float timer;
     private Vector2Int minBounds;
     private Vector2Int maxBounds;
+    private SnakeTween snakeTween;
     private FoodSpawner foodSpawner;
     private BoardGrid boardGrid;
     private WallSpawner wallSpawner;
@@ -60,6 +61,7 @@ public class Snake : MonoBehaviour
         snakeBodyList = new List<Transform>();
         foodSpawner = gameRef.FoodSpawner.GetComponent<FoodSpawner>();
         wallSpawner = gameRef.WallSpawner.GetComponent<WallSpawner>();
+        snakeTween = gameObject.GetComponent<SnakeTween>();
     }
 
     private void Update()
@@ -210,6 +212,7 @@ public class Snake : MonoBehaviour
     {
         //Add points
         pointsTracker.AddPoints();
+        snakeTween.EatTween();
         //Increase speed
         movemantSpeed += speedIncrease;
         wallSpawner.WallSpawnTime -= speedIncrease;
