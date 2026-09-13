@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WallSpawner : MonoBehaviour
 {
+    [SerializeField] private bool notSpawning = false;
     [SerializeField] private GameObject indicatorprefab;
     [SerializeField] private float indicatorDuration;
     [SerializeField] private List<GameObject> wallList = new List<GameObject>();
@@ -21,7 +22,7 @@ public class WallSpawner : MonoBehaviour
     private float wallTimer;
     private Vector2Int wallPos;
     private Quaternion wallRotation;
-    private bool isSpawning;
+    private bool isSpawningSeq;
     private Vector3 indicatorSpawnPosition;
     private List<GameObject> liveWallsList = new List<GameObject>();
     public List<GameObject> LiveWallsList => liveWallsList;
@@ -38,7 +39,7 @@ public class WallSpawner : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (gameStarted)
+        if (gameStarted && !notSpawning)
             WallCycle();
     }
 
@@ -53,13 +54,13 @@ public class WallSpawner : MonoBehaviour
 
     private void SpawnWall()
     {
-        if (!isSpawning)
+        if (!isSpawningSeq)
             StartCoroutine(SpawnWallSeq());
     }
 
     private IEnumerator SpawnWallSeq()
     {
-        isSpawning = true;
+        isSpawningSeq = true;
         
         GameObject wallToSpawn = wallList[Random.Range(0, wallList.Count)];
         wallRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
@@ -83,7 +84,7 @@ public class WallSpawner : MonoBehaviour
         liveWallsList.Add(wall);
         Debug.Log($"New Walls Count: {liveWallsList.Count} ");
         
-        isSpawning = false;
+        isSpawningSeq = false;
         wallTimer = 0;
     }
 

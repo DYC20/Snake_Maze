@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6728520508713725695}
   - component: {fileID: -2937089554440225002}
+  - component: {fileID: -4304143903468084962}
   - component: {fileID: 2676148856897097939}
   - component: {fileID: 8905162541782669433}
   m_Layer: 7
@@ -47,6 +48,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19501b361d850af478d9472623ab761e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &-4304143903468084962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792063327127003922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2f02e4369124114386c3c1f3bb0bd0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SnakeTween
+  eatEndScale: 1.75
+  eatDuration: 0.1
+  eatEase: 31
 --- !u!61 &2676148856897097939
 BoxCollider2D:
   m_ObjectHideFlags: 0

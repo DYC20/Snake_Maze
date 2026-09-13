@@ -11912,6 +11912,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39913a02d5b163741b46f2343a33dd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  notSpawning: 1
   indicatorprefab: {fileID: 3138998552919831436, guid: 3564e5c8bf7bfbd418548a89f507ea6b, type: 3}
   indicatorDuration: 1
   wallList:
@@ -12170,6 +12171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   foodPrefab: {fileID: 3443883044627142788, guid: 9221404de78b69d468ffd1f4fb7b4164, type: 3}
   foodLifetime: 30
+  startGrid: {x: 5, y: 5}
+  gridGrowAmount: 2
 --- !u!4 &434696122
 Transform:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 
 public class Snake : MonoBehaviour
 {
@@ -208,11 +209,23 @@ public class Snake : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private IEnumerator CallEatTween()
+    {
+        Tween eatTween = snakeTween.EatTween();
+        float delayBetweenTweens = snakeTween.DelayBetweenTweens;
+        yield return new WaitForSeconds(delayBetweenTweens);
+       
+        for (int i = 0; snakeBodyList.Count > i; i++)
+        {
+            snakeBodyList[i].GetComponent<SnakeTween>().EatTween();
+            yield return new WaitForSeconds(delayBetweenTweens);
+        }
+    }
     private void EatFood()
     {
         //Add points
         pointsTracker.AddPoints();
-        snakeTween.EatTween();
+        StartCoroutine(CallEatTween());
         //Increase speed
         movemantSpeed += speedIncrease;
         wallSpawner.WallSpawnTime -= speedIncrease;
