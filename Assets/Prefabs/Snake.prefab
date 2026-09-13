@@ -47,8 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd5d45e93eafdf40a7fbe37cde5e198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Snake
-  movemantSpeed: 2.5
-  speedIncrease: 0
+  movemantSpeed: 1.5
+  speedIncrease: 0.3
   snakeBodyPrefab: {fileID: 1792063327127003922, guid: 6c640e12756cb85478bf4e4f3124ab34, type: 3}
 --- !u!50 &5180768433509869553
 Rigidbody2D:

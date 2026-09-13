@@ -79,11 +79,9 @@ public class WallSpawner : MonoBehaviour
         //indicator.GetComponent<IndicatorManager>().DestroyIndicator;
         
         wall = Instantiate(wallToSpawn, new Vector3(wallPos.x, wallPos.y), wallRotation);
-
-        for (int i = 0; i < liveWallsList.Count; i++)
-        {
-            liveWallsList.Add(wall);
-        }
+        
+        liveWallsList.Add(wall);
+        Debug.Log($"New Walls Count: {liveWallsList.Count} ");
         
         isSpawning = false;
         wallTimer = 0;
