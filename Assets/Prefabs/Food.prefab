@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2978737542004024416}
   - component: {fileID: 4681592915911708501}
+  - component: {fileID: 1904115146506272943}
   - component: {fileID: 431000701858855796}
   m_Layer: 6
   m_Name: Food
@@ -80,6 +81,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.6248711, y: 0.655161}
   m_EdgeRadius: 0
+--- !u!114 &1904115146506272943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443883044627142788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c86e6441a920a5347811a5d337236ca4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UICoverCheck
+  scoreboard: {fileID: 0}
 --- !u!114 &431000701858855796
 MonoBehaviour:
   m_ObjectHideFlags: 0

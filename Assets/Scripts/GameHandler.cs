@@ -21,19 +21,11 @@ public class GameHandler : MonoBehaviour
     {
         //Assign and create snake OB
         GameObject snakeHeadObj = Instantiate(snakePrefab);
-        //SpriteRenderer snakeSpriteRenderer =  snakeHeadObj.GetComponent<SpriteRenderer>();
         snake = snakeHeadObj.GetComponent<Snake>();
         snake.EndGameCanvas = endGameCanvas;
         snake.PointsTracker = pointsTracker;
         snake.WallSpawner = wallSpawner;
-        /*
-        if (snakeSpriteRenderer == null)
-        {
-            snakeSpriteRenderer = snakeHeadObj.AddComponent<SpriteRenderer>();
-            snakeSpriteRenderer.sprite = GameAssets.instance.snakeHeadSprite;
-        }
-        */
-        wallSpawner.DestroyWalls();
+        wallSpawner.DestroyAllWalls();
         wallSpawner.GameStarted = true;
         foodSpawner.GameStarted = true;
         foodSpawner.NotFirstSpawn = false;

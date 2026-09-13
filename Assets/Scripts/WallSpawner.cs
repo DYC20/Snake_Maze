@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WallSpawner : MonoBehaviour
@@ -7,10 +8,11 @@ public class WallSpawner : MonoBehaviour
     [SerializeField] private bool notSpawning = false;
     [SerializeField] private GameObject indicatorprefab;
     [SerializeField] private float indicatorDuration;
-    [SerializeField] private List<GameObject> wallList = new List<GameObject>();
+    [SerializeField] private List<GameObject> wallPrefabList = new List<GameObject>();
     [SerializeField] private float wallSpawnTime = 3f;
     [SerializeField] private Vector2Int endPoindOffset;
     [SerializeField, Range(0f, 0.2f)] private float indicatorEdgePadding = 0.05f;
+    [SerializeField] private float WallsLLifetime = 5f;
 
     private bool gameStarted = false;
     public bool GameStarted {get => gameStarted; set => gameStarted = value; }
@@ -50,6 +52,16 @@ public class WallSpawner : MonoBehaviour
         {
             SpawnWall();
         }
+        if (wallTimer >= WallsLLifetime + wallSpawnTime)
+            DestroySingleWall();
+    }
+
+    private void DestroySingleWall()
+    {
+        GameObject wallToDestroy;
+        wallToDestroy = LiveWallsList.Last();
+        LiveWallsList.Remove(wallToDestroy);
+        Destroy(wallToDestroy);
     }
 
     private void SpawnWall()
@@ -62,7 +74,7 @@ public class WallSpawner : MonoBehaviour
     {
         isSpawningSeq = true;
         
-        GameObject wallToSpawn = wallList[Random.Range(0, wallList.Count)];
+        GameObject wallToSpawn = wallPrefabList[Random.Range(0, wallPrefabList.Count)];
         wallRotation = Quaternion.Euler(0, 0, Random.Range(0, 360));
         wallPos = new Vector2Int(Random.Range(posMin.x, posMax.x), Random.Range(posMin.y, posMax.y));
         Vector3 wallSpawnPos = new Vector3(wallPos.x, wallPos.y);
@@ -88,7 +100,7 @@ public class WallSpawner : MonoBehaviour
         wallTimer = 0;
     }
 
-    public void DestroyWalls()
+    public void DestroyAllWalls()
     {
         Debug.Log($"Destroying {liveWallsList.Count} walls");
         for (int i = liveWallsList.Count - 1; i >= 0; i--)

@@ -5,6 +5,7 @@ public class GameRef : MonoBehaviour
     public static GameRef instance;
     
     //Available References
+    [SerializeField] private Canvas scoreCanvas;
     [SerializeField] private Snake snake;
     [SerializeField] private Background background;
     [SerializeField] private GameObject snakeBodyPrefab;
@@ -14,6 +15,7 @@ public class GameRef : MonoBehaviour
     [SerializeField] private GameHandler gameHandler;
     
     //Getters
+    public Canvas ScoreCanvas => scoreCanvas;
     public Snake Snake => snake;
     public Background Background => background;
     public GameObject SnakeBodyPrefab => snakeBodyPrefab;
