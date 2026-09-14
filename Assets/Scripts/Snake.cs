@@ -10,6 +10,7 @@ public class Snake : MonoBehaviour
     [SerializeField] private float speedIncrease = 0.1f;
     [SerializeField] private GameObject snakeBodyPrefab;
     
+    private bool isMoving = true;
     private Vector2Int snakePosition;
     private Vector2Int previousHeadPosition;
     private Vector2Int nextDirection = Vector2Int.up;
@@ -58,6 +59,7 @@ public class Snake : MonoBehaviour
 
     private void Start()
     {
+        isMoving = true;
         timer = 1f / movemantSpeed;
         snakeBodyList = new List<Transform>();
         foodSpawner = gameRef.FoodSpawner.GetComponent<FoodSpawner>();
@@ -144,38 +146,42 @@ public class Snake : MonoBehaviour
     }
     private void MoveSnake()
     {
-        snakeDirection = nextDirection;
-        directionQueued = false;
-        
-        previousHeadPosition = snakePosition;
-        snakePosition += snakeDirection;
-        WrapPosition();
-        
-        snakeMovePositionList.Insert(0, previousHeadPosition);
-        
-        transform.position = new Vector3(snakePosition.x, snakePosition.y);
-        transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
-        /*
-        Debug.Log(
-            $"Body parts: {snakeBodyList.Count}, " +
-            $"positions: {snakeMovePositionList.Count}"
-        );
-        */
-        for (int i = 0; i < snakeBodyList.Count; i++)
+        if (isMoving)
         {
-            Vector2Int bodyPosition = snakeMovePositionList[i];
-    
-            snakeBodyList[i].position = new Vector3(bodyPosition.x, bodyPosition.y);
-            //Debug.Log("snakeBodyList:" + snakeBodyList.Count);
+            snakeDirection = nextDirection;
+                    directionQueued = false;
+                    
+                    previousHeadPosition = snakePosition;
+                    snakePosition += snakeDirection;
+                    WrapPosition();
+                    
+                    snakeMovePositionList.Insert(0, previousHeadPosition);
+                    
+                    transform.position = new Vector3(snakePosition.x, snakePosition.y);
+                    transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
+                    /*
+                    Debug.Log(
+                        $"Body parts: {snakeBodyList.Count}, " +
+                        $"positions: {snakeMovePositionList.Count}"
+                    );
+                    */
+                    for (int i = 0; i < snakeBodyList.Count; i++)
+                    {
+                        Vector2Int bodyPosition = snakeMovePositionList[i];
+                
+                        snakeBodyList[i].position = new Vector3(bodyPosition.x, bodyPosition.y);
+                        //Debug.Log("snakeBodyList:" + snakeBodyList.Count);
+                    }
+                    CheckPosCollision();
+            
+                    while (snakeMovePositionList.Count > snakeBodyList.Count)
+                    {
+                        snakeMovePositionList.RemoveAt(
+                            snakeMovePositionList.Count - 1
+                        );
+                    }
         }
-        CheckPosCollision();
-
-        while (snakeMovePositionList.Count > snakeBodyList.Count)
-        {
-            snakeMovePositionList.RemoveAt(
-                snakeMovePositionList.Count - 1
-            );
-        }
+        
     }
 
     private void CheckPosCollision()
@@ -191,29 +197,18 @@ public class Snake : MonoBehaviour
             Vector2Int vec2SnakeBodyTran = new Vector2Int(Mathf.RoundToInt
                 (snakeBodyTran.position.x), Mathf.RoundToInt(snakeBodyTran.position.y));
             if (vec2SnakeBodyTran == snakePosition)
-                DestroySnake();
+                StartCoroutine(DestroySnake());
         }
         
     }
 
-    private void DestroySnake()
+    private IEnumerator DestroySnake()
     {
         Debug.Log("Snake destroyed");
+        isMoving = false;
         pointsTracker.ResetPoints();
         gameRef.GameHandler.GameEnd();
-        endGameCanvas.gameObject.SetActive(true);
-        foreach (var snakeBodyTran in snakeBodyList)
-        {
-            SnakeBodyPart snakeBodyPart = snakeBodyTran.GetComponent<SnakeBodyPart>();
-            StartCoroutine(snakeBodyPart.DestroyBodyPart());
-        }
-
-        StartCoroutine(DestroySnakeHead());
         
-    }
-
-    private IEnumerator DestroySnakeHead()
-    {
         SpriteRenderer sr = gameObject
             .GetComponentInChildren<SpriteRenderer>();
         sr.enabled = false;
@@ -222,12 +217,18 @@ public class Snake : MonoBehaviour
         ps.Play();
         yield return new WaitUntil(() => !ps.IsAlive());
         
+        for (int i = 0; i < snakeBodyList.Count; i++)
+        {
+            SnakeBodyPart snakeBodyPart = snakeBodyList[i].GetComponent<SnakeBodyPart>();
+            StartCoroutine(snakeBodyPart.DestroyBodyPart());
+            yield return new WaitForSeconds(snakeTween.DelayBetweenTweens);
+        }
+        
+        endGameCanvas.gameObject.SetActive(true);
         Destroy(gameObject);
     }
-
     private IEnumerator CallEatTween()
     {
-        Tween eatTween = snakeTween.EatTween();
         float delayBetweenTweens = snakeTween.DelayBetweenTweens;
         yield return new WaitForSeconds(delayBetweenTweens);
        

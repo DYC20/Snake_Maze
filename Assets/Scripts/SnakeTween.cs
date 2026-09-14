@@ -29,7 +29,7 @@ public class SnakeTween : MonoBehaviour
     }
 
 
-    public Tween EatTween()
+    public void EatTween()
     {
         Sequence seq = DOTween.Sequence();
         seq.Append(transform
@@ -43,8 +43,6 @@ public class SnakeTween : MonoBehaviour
         seq.OnComplete(() => seq.Kill()); 
         
         Debug.LogWarning("Eat Animation Complete");   
-        
-        return seq;
         
     }
 }
