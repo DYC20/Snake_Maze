@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class SnakeBodyPart : MonoBehaviour
@@ -9,6 +10,19 @@ public class SnakeBodyPart : MonoBehaviour
     public void Initialize(Snake owner)
     {
         snake = owner;
+    }
+
+    public IEnumerator DestroyBodyPart()
+    {
+        SpriteRenderer sr = gameObject
+            .GetComponentInChildren<SpriteRenderer>();
+        sr.enabled = false;
+        ParticleSystem ps = gameObject
+            .GetComponentInChildren<ParticleSystem>();
+        ps.Play();
+        yield return new WaitUntil(() => !ps.IsAlive());
+        
+        Destroy(gameObject);
     }
     
     private void OnTriggerEnter2D(Collider2D collision)

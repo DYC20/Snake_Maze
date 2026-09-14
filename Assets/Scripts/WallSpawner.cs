@@ -84,7 +84,7 @@ public class WallSpawner : MonoBehaviour
        indicator = Instantiate(
             indicatorprefab,
             indicatorSpawnPosition,
-            Quaternion.identity);
+            Quaternion.Euler(0, 0, 180));
         
         yield return new WaitForSeconds(indicatorDuration);
 

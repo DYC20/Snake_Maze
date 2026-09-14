@@ -183,7 +183,7 @@ public class Snake : MonoBehaviour
         if (foodSpawner.FoodPos == snakePosition)
         {
             EatFood();
-            foodSpawner.Respawn();
+            StartCoroutine(foodSpawner.Respawn());
         }
 
         foreach (var snakeBodyTran in snakeBodyList)
@@ -204,8 +204,24 @@ public class Snake : MonoBehaviour
         endGameCanvas.gameObject.SetActive(true);
         foreach (var snakeBodyTran in snakeBodyList)
         {
-            Destroy(snakeBodyTran.gameObject);
+            SnakeBodyPart snakeBodyPart = snakeBodyTran.GetComponent<SnakeBodyPart>();
+            StartCoroutine(snakeBodyPart.DestroyBodyPart());
         }
+
+        StartCoroutine(DestroySnakeHead());
+        
+    }
+
+    private IEnumerator DestroySnakeHead()
+    {
+        SpriteRenderer sr = gameObject
+            .GetComponentInChildren<SpriteRenderer>();
+        sr.enabled = false;
+        ParticleSystem ps = gameObject
+            .GetComponentInChildren<ParticleSystem>();
+        ps.Play();
+        yield return new WaitUntil(() => !ps.IsAlive());
+        
         Destroy(gameObject);
     }
 
@@ -225,6 +241,7 @@ public class Snake : MonoBehaviour
     {
         //Add points
         pointsTracker.AddPoints();
+        
         StartCoroutine(CallEatTween());
         //Increase speed
         movemantSpeed += speedIncrease;

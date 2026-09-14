@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -16,8 +18,8 @@ public class FoodSpawner : MonoBehaviour
     [Header("manager")]
     private GameRef gameRef;
     private bool gameStarted = false;
-    public bool GameStarted {set => gameStarted = value; }
     bool notFirstSpawn = false;
+    public bool GameStarted {set => gameStarted = value; }
     public bool NotFirstSpawn  { set => notFirstSpawn = value; }
 
     [Header("Grid")]    
@@ -38,7 +40,7 @@ public class FoodSpawner : MonoBehaviour
     private void FirstSpawn()
     {
         InitializeGrid();
-        Respawn();
+        SpawnFood();
         notFirstSpawn = true;
     }
 
@@ -66,12 +68,18 @@ public class FoodSpawner : MonoBehaviour
         foodTimer += Time.deltaTime;
         if (foodTimer >= foodLifetime)
         {
-            Respawn();
+            StartCoroutine(Respawn());
         }
     }
 
-    public void Respawn()
+    public IEnumerator Respawn()
     {
+        ParticleSystem ps = food.GetComponentInChildren<ParticleSystem>();
+        SpriteRenderer foodSpriteRenderer = food.GetComponentInChildren<SpriteRenderer>();
+        foodSpriteRenderer.enabled = false;
+        ps.Play();
+        yield return new WaitUntil(() => !ps.IsAlive());
+
         Destroy(food);
         SpawnFood();
         foodTimer = 0;
