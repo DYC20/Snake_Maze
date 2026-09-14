@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d605b7b6a81ce75438ebe612684d538a
+guid: 51a1b9620623e53419a13e879c8e54dc
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7912781244460916750
-    second: Button 512X128_0
+      213: -8668657545571369102
+    second: CircleGradiant_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,15 +46,15 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 123, y: 46, z: 127, w: 41}
+  spriteBorder: {x: 110, y: 113, z: 115, w: 112}
   spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 1
+  alphaUsage: 2
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button 512X128_0
+      name: CircleGradiant_0
       rect:
         serializedVersion: 2
-        x: 101
-        y: 18
-        width: 311
-        height: 88
+        x: 0
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 21, y: 27, z: 28, w: 21}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e00677d3e98dfcd60800000000000000
-      internalID: 7912781244460916750
+      spriteID: 27f75bc04edb2b780800000000000000
+      internalID: -8668657545571369102
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Button 512X128_0: 7912781244460916750
+      CircleGradiant_0: -8668657545571369102
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

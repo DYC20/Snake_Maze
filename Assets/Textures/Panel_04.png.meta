@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d605b7b6a81ce75438ebe612684d538a
+guid: d520727c34a8ecb4f92aa07b913bf3e4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7912781244460916750
-    second: Button 512X128_0
+      213: 2164139788026142878
+    second: Panel_04_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +52,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 123, y: 46, z: 127, w: 41}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button 512X128_0
+      name: Panel_04_0
       rect:
         serializedVersion: 2
-        x: 101
-        y: 18
-        width: 311
-        height: 88
+        x: 16
+        y: 22
+        width: 481
+        height: 470
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 21, y: 27, z: 28, w: 21}
+      border: {x: 40, y: 43, z: 41, w: 46}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e00677d3e98dfcd60800000000000000
-      internalID: 7912781244460916750
+      spriteID: e90669dcba1980e10800000000000000
+      internalID: 2164139788026142878
       vertices: []
       indices: 
       edges: []
@@ -138,8 +138,8 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    spriteID: 4d4e33087416f054482340076e5fcbe3
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Button 512X128_0: 7912781244460916750
+      Panel_04_0: 2164139788026142878
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

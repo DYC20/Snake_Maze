@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d605b7b6a81ce75438ebe612684d538a
+guid: 8e355d84ac4bd864a8d1517deadb21e0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7912781244460916750
-    second: Button 512X128_0
+      213: -2320933535977312224
+    second: TopBar 512X128_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,11 +48,11 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 123, y: 46, z: 127, w: 41}
+  spriteBorder: {x: 117, y: 46, z: 128, w: 35}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -113,23 +113,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button 512X128_0
+      name: TopBar 512X128_0
       rect:
         serializedVersion: 2
         x: 101
-        y: 18
-        width: 311
-        height: 88
+        y: 30
+        width: 300
+        height: 77
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 21, y: 27, z: 28, w: 21}
+      border: {x: 16, y: 15, z: 13, w: 16}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e00677d3e98dfcd60800000000000000
-      internalID: 7912781244460916750
+      spriteID: 020f7c0fe336acfd0800000000000000
+      internalID: -2320933535977312224
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Button 512X128_0: 7912781244460916750
+      TopBar 512X128_0: -2320933535977312224
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

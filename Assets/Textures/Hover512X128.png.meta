@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d605b7b6a81ce75438ebe612684d538a
+guid: ccad905496a65774c8d5e703d9dd7aea
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7912781244460916750
-    second: Button 512X128_0
+      213: -6413627706450616886
+    second: Hover512X128_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +52,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 123, y: 46, z: 127, w: 41}
+  spriteBorder: {x: 121, y: 46, z: 126, w: 39}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Button 512X128_0
+      name: Hover512X128_0
       rect:
         serializedVersion: 2
         x: 101
@@ -122,14 +122,14 @@ TextureImporter:
         height: 88
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 21, y: 27, z: 28, w: 21}
+      border: {x: 21, y: 27, z: 27, w: 22}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e00677d3e98dfcd60800000000000000
-      internalID: 7912781244460916750
+      spriteID: acd5863f4973ef6a0800000000000000
+      internalID: -6413627706450616886
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Button 512X128_0: 7912781244460916750
+      Hover512X128_0: -6413627706450616886
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
