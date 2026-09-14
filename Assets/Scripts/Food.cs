@@ -11,6 +11,8 @@ public class Food : MonoBehaviour
     
     [Header("Instantiation Effect")]
     [SerializeField] private ParticleSystem effect;
+    [SerializeField] private float waitForPS;
+    private ParticleSystem ps;
     
     [Header("Instantiation Tween")]
     [SerializeField] private float tweenDuration;
@@ -22,11 +24,20 @@ public class Food : MonoBehaviour
     private float startScale;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        startScale = transform.localScale.x;
+    }
+
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        startScale = transform.localScale.x;
-        Instantiate(effect.gameObject, transform.position, Quaternion.identity);
+        transform.localScale = Vector3.zero;
+        ps = Instantiate(effect, transform.position, effect.transform.rotation);
+        if (effect == null)
+        {
+            Debug.LogError("No effect attached to " + gameObject.name);
+        }
         InstantiationTween();
     }
 
@@ -34,7 +45,11 @@ public class Food : MonoBehaviour
     {
         Sequence seq = DOTween.Sequence();
 
-        seq.AppendCallback(() => effect.Play()); 
+        seq.AppendCallback(() =>
+        {
+            ps.Play();
+        });
+        seq.AppendInterval(waitForPS);
         seq.Append(transform.DOShakeRotation(
             tweenDuration, shakeStrength, shakeVibrato).SetEase(ease));
         seq.Join(transform.DOScale(
@@ -44,6 +59,11 @@ public class Food : MonoBehaviour
         if (effect == null)
         {
             Debug.LogError("Effect is null");
+        }
+
+        if (effect.main.duration == 0f)
+        {
+            Destroy(ps.gameObject);
         }
     }
 

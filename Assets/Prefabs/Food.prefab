@@ -108,7 +108,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   normalColor: {r: 0.7725491, g: 0.1254902, b: 0.11764707, a: 0}
   hoverColor: {r: 1, g: 0.27058825, b: 0.2627451, a: 0}
-  effect: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+  effect: {fileID: 3326220239933914838, guid: e1109047d6c1ddb43b74797410d3b5de, type: 3}
+  waitForPS: 0.25
   tweenDuration: 0.2
   ease: 31
   shakeStrength: {x: 0, y: 0, z: 55}

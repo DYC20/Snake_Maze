@@ -277,6 +277,7 @@ public class Snake : MonoBehaviour
         //Debug.Log("Body count: " + snakeBodyList.Count);
         //Debug.Log("EatFood");
     }
+    
     //Written with AI end
     public void RemoveBodyPart(SnakeBodyPart bodyPart)
     {
