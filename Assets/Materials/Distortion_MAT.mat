@@ -56,12 +56,12 @@ Material:
     - _Float: 7
     - _NoiseAmount: 0.03
     - _NoiseAmount_01: 0.03
-    - _NoiseAmount_02: 0.35
-    - _NoiseIntencity_01: 7
-    - _NoiseIntencity_02: 6
+    - _NoiseAmount_02: 0.03
+    - _NoiseIntencity_01: 6.15
+    - _NoiseIntencity_02: 8.31
     - _NoiseSpeed: -0.42
-    - _NoiseSpeed_01: -2
-    - _NoiseSpeed_02: -1
+    - _NoiseSpeed_01: -1
+    - _NoiseSpeed_02: -0.5
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 1
@@ -73,7 +73,7 @@ Material:
     m_Colors:
     - White: {r: 1, g: 1, b: 1, a: 1}
     - _NoiseTiling_01: {r: 1, g: 10, b: 0, a: 0}
-    - _NoiseTiling_02: {r: 1, g: 5, b: 0, a: 0}
+    - _NoiseTiling_02: {r: 1, g: 2, b: 0, a: 0}
     - _Vector4: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
