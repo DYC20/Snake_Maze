@@ -47,5 +47,8 @@ TagManager:
   - name: FX
     uniqueID: 2863983237
     locked: 0
+  - name: CameraSortingLayer
+    uniqueID: 1886317859
+    locked: 0
   m_RenderingLayers:
   - Default
