@@ -50,6 +50,8 @@ public class FoodSpawner : MonoBehaviour
         {
             if (!notFirstSpawn)
             {
+                if(food != null)
+                    Destroy(food);
                 FirstSpawn();
             }
             FoodCycle();
