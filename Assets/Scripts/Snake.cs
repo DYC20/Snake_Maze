@@ -306,7 +306,7 @@ public class Snake : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             //snake loose health | dies
-            DestroySnake();
+            StartCoroutine(DestroySnake());
             Debug.Log("Head Hit Wall");
         }
     }

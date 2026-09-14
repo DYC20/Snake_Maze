@@ -106,6 +106,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d514c84d571169e4294e961eacfa2c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  normalColor: {r: 0.7725491, g: 0.1254902, b: 0.11764707, a: 0}
+  hoverColor: {r: 1, g: 0.27058825, b: 0.2627451, a: 0}
+  effect: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+  tweenDuration: 0.2
+  ease: 31
+  shakeStrength: {x: 0, y: 0, z: 55}
+  shakeVibrato: 20
+  scaleValue: 1.6
 --- !u!1 &5939693269158289576
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +196,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 2c0e2020b37a3e24fa68f9e8e9d18c03, type: 3}
-  m_Color: {r: 0.7735849, g: 0.12605223, b: 0.11920003, a: 1}
+  m_Color: {r: 0.7725491, g: 0.1254902, b: 0.11764707, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -1,13 +1,50 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class Food : MonoBehaviour
 {
+    [Header("Sprite")]
+    [SerializeField] private Color normalColor;
+    [SerializeField] private Color hoverColor;
     private SpriteRenderer spriteRenderer;
+    
+    [Header("Instantiation Effect")]
+    [SerializeField] private ParticleSystem effect;
+    
+    [Header("Instantiation Tween")]
+    [SerializeField] private float tweenDuration;
+    [SerializeField] private Ease ease = Ease.OutBounce;
+    
+    [SerializeField] private Vector3 shakeStrength;
+    [SerializeField] private int shakeVibrato;
+    [SerializeField] private float scaleValue;
+    private float startScale;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        startScale = transform.localScale.x;
+        Instantiate(effect.gameObject, transform.position, Quaternion.identity);
+        InstantiationTween();
+    }
+
+    private void InstantiationTween()
+    {
+        Sequence seq = DOTween.Sequence();
+
+        seq.AppendCallback(() => effect.Play()); 
+        seq.Append(transform.DOShakeRotation(
+            tweenDuration, shakeStrength, shakeVibrato).SetEase(ease));
+        seq.Join(transform.DOScale(
+            scaleValue, tweenDuration / 2).SetEase(ease));
+        seq.Append(transform.DOScale(
+            startScale, tweenDuration / 2).SetEase(ease));
+        if (effect == null)
+        {
+            Debug.LogError("Effect is null");
+        }
     }
 
     // Update is called once per frame
@@ -21,7 +58,7 @@ public class Food : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             Debug.Log($"OnTriggerEnter Food: {other.gameObject.name}");
-            spriteRenderer.color = Color.white;
+            spriteRenderer.color = hoverColor;
         }
     }
 
@@ -29,7 +66,7 @@ public class Food : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
-            spriteRenderer.color = Color.black;
+            spriteRenderer.color = normalColor;
         }
     }
 }
