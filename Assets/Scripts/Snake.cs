@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using UnityEngine.Playables;
 
 public class Snake : MonoBehaviour
 {
@@ -225,6 +226,10 @@ public class Snake : MonoBehaviour
         }
         
         endGameCanvas.gameObject.SetActive(true);
+        PlayableDirector pd = endGameCanvas.gameObject
+            .GetComponent<PlayableDirector>();
+        PlayableAsset pa = gameRef.EndGameCanvasTL;
+        pd.playableAsset = pa;
         Destroy(gameObject);
     }
     private IEnumerator CallEatTween()

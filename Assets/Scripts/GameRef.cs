@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class GameRef : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class GameRef : MonoBehaviour
     
     //Available References
     [SerializeField] private Canvas scoreCanvas;
+    [SerializeField] private PlayableAsset endGameCanvasTL;
     [SerializeField] private Snake snake;
     [SerializeField] private Background background;
     [SerializeField] private GameObject snakeBodyPrefab;
@@ -16,6 +18,7 @@ public class GameRef : MonoBehaviour
     
     //Getters
     public Canvas ScoreCanvas => scoreCanvas;
+    public PlayableAsset EndGameCanvasTL => endGameCanvasTL;
     public Snake Snake => snake;
     public Background Background => background;
     public GameObject SnakeBodyPrefab => snakeBodyPrefab;
