@@ -9,13 +9,14 @@ public class CoinTween : MonoBehaviour
 {
     private GameObject coinPrefab;
     private GameObject coin;
-    //private List<GameObject> coinsList;
     [SerializeField] private int NumberOfCoins;
     [SerializeField] private float incrementBy;
+    
     [Header("Scale")]
     [SerializeField] private float scaleDuration;
     [SerializeField] private float targetScale;
     [SerializeField] private Ease scaleEase;
+    
     [Header("Movement")]
     private Vector3 targetPosition;
     [SerializeField] private float movementDuration;

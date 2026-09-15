@@ -7,7 +7,6 @@ public class BoardGrid : MonoBehaviour
     private Vector3 center = Vector3.zero;
     public Vector3 Center => center;
     
-    
     private Camera mainCamera;
     private void Awake()
     {

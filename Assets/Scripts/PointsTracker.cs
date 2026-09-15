@@ -6,8 +6,6 @@ public class PointsTracker : MonoBehaviour
     [SerializeField] private float scoreValue;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
-    //private float currentScore;
-    //private float currentHighScore;
     private float score;
     private float hieghestScore;
     void Start()

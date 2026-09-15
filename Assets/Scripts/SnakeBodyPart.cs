@@ -5,7 +5,6 @@ using UnityEngine;
 public class SnakeBodyPart : MonoBehaviour
 {
     private Snake snake;
-    public int BodyIndex { get; set; }
     
     public void Initialize(Snake owner)
     {

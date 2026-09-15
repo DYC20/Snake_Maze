@@ -6,12 +6,13 @@ using Random = UnityEngine.Random;
 
 public class ScoreBoard : MonoBehaviour
 {
+    private GameRef gameRef;
     Vector3 newPosition;
     RectTransform rectTransform;
-    private float lockedY;
-    private GameRef gameRef;
     private Vector2Int minBounds;
     private Vector2Int maxBounds;
+    private float lockedY;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {

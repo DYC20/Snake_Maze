@@ -7,32 +7,36 @@ using UnityEngine.Playables;
 
 public class Snake : MonoBehaviour
 {
+    [Header("General")]
+    private GameRef gameRef;
+    private SnakeTween snakeTween;
+    private PointsTracker pointsTracker;
+    private Canvas endGameCanvas;
+    public PointsTracker PointsTracker {set => pointsTracker = value; }
+    public Canvas EndGameCanvas { set => endGameCanvas = value; }
+    
+    [Header("Snake & Movement")]
+    [SerializeField] private GameObject snakeBodyPrefab;
     [SerializeField] private float movemantSpeed = 1f;
     [SerializeField] private float speedIncrease = 0.1f;
-    [SerializeField] private GameObject snakeBodyPrefab;
-    
+    private float timer;
     private bool isMoving = true;
     private Vector2Int snakePosition;
     private Vector2Int previousHeadPosition;
     private Vector2Int nextDirection = Vector2Int.up;
-    private bool directionQueued;
     private Vector2Int snakeDirection;
+    private bool directionQueued;
     private List<Vector2Int> snakeMovePositionList; 
     private List<Transform> snakeBodyList;
-    private float timer;
+    
+    [Header("Spawners ")]
     private Vector2Int minBounds;
     private Vector2Int maxBounds;
-    private SnakeTween snakeTween;
     private FoodSpawner foodSpawner;
     private BoardGrid boardGrid;
     private WallSpawner wallSpawner;
     public WallSpawner WallSpawner{set => wallSpawner = value;}
-    private GameRef gameRef;
-    private PointsTracker pointsTracker;
-    public PointsTracker PointsTracker {set => pointsTracker = value; }
-    private Canvas endGameCanvas;
-    public Canvas EndGameCanvas { set => endGameCanvas = value; }
-
+    
     private void Awake()
     {
         gameRef = GameRef.instance;

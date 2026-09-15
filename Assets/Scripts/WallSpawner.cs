@@ -5,30 +5,36 @@ using UnityEngine;
 
 public class WallSpawner : MonoBehaviour
 {
-    [SerializeField] private bool notSpawning = false;
-    [SerializeField] private GameObject indicatorprefab;
-    [SerializeField] private float indicatorDuration;
-    [SerializeField] private List<GameObject> wallPrefabList = new List<GameObject>();
-    [SerializeField] private float wallSpawnTime = 3f;
-    [SerializeField] private Vector2Int endPoindOffset;
-    [SerializeField, Range(0f, 0.2f)] private float indicatorEdgePadding = 0.05f;
-    [SerializeField] private float WallsLLifetime = 5f;
-
+    [Header("General")]
     private bool gameStarted = false;
     public bool GameStarted {get => gameStarted; set => gameStarted = value; }
     private Camera mainCamera;
+    
+    [Header("Wall")]
+    [SerializeField] private List<GameObject> wallPrefabList = new List<GameObject>();
+    [SerializeField] private float WallsLLifetime = 5f;
+    private GameObject wall;
+    private Vector2Int wallPos;
+    private Quaternion wallRotation;    
+    private List<GameObject> liveWallsList = new List<GameObject>();
+    public List<GameObject> LiveWallsList => liveWallsList; 
+    
+    [Header("Wall Spawner")]
+    [SerializeField] private bool notSpawning = false;
+    [SerializeField] private float wallSpawnTime = 3f;
+    [SerializeField] private Vector2Int endPoindOffset;
     private Vector2Int posMax;
     private Vector2Int posMin;
-    private GameObject wall;
-    private GameObject indicator;
     private float wallTimer;
-    private Vector2Int wallPos;
-    private Quaternion wallRotation;
     private bool isSpawningSeq;
-    private Vector3 indicatorSpawnPosition;
-    private List<GameObject> liveWallsList = new List<GameObject>();
-    public List<GameObject> LiveWallsList => liveWallsList;
     public float WallSpawnTime{get => wallSpawnTime; set => wallSpawnTime = value;}
+    
+    [Header("Indicator")]
+    [SerializeField] private GameObject indicatorprefab;
+    [SerializeField] private float indicatorDuration;
+    [SerializeField, Range(0f, 0.2f)] private float indicatorEdgePadding = 0.05f;
+    private GameObject indicator;
+    private Vector3 indicatorSpawnPosition;
     
     private void Awake()
     {

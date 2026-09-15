@@ -10,8 +10,9 @@ public class SnakeTween : MonoBehaviour
     [SerializeField] private float eatDuration;
     [SerializeField] private Ease eatEase;
     [SerializeField] private Color eatColor;
-    private float delayBetweenTweens;
+    
     private SpriteRenderer sp;
+    private float delayBetweenTweens;
     public float DelayBetweenTweens => delayBetweenTweens;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created

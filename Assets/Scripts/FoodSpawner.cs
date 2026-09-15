@@ -11,7 +11,6 @@ public class FoodSpawner : MonoBehaviour
     [SerializeField] private GameObject foodPrefab;
     [SerializeField] private float foodLifetime = 3f;
     private GameObject food;
-    public GameObject Food => food;
     private bool isRespawning = false;
     private float foodTimer;
     private Vector2Int foodPos;

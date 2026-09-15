@@ -11,12 +11,7 @@ public class GameHandler : MonoBehaviour
  [SerializeField] private Canvas endGameCanvas;
  
  private Snake snake;
-
- private void Start()
- {
-     
- }
-
+ 
  public void StartGame()
     {
         //Assign and create snake OB
@@ -29,7 +24,6 @@ public class GameHandler : MonoBehaviour
         wallSpawner.GameStarted = true;
         foodSpawner.GameStarted = true;
         foodSpawner.NotFirstSpawn = false;
-        //startGameCanvas.gameObject.SetActive(false);
         endGameCanvas.gameObject.SetActive(false);
     }
 
