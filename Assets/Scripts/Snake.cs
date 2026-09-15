@@ -151,35 +151,35 @@ public class Snake : MonoBehaviour
             snakeDirection = nextDirection;
                     directionQueued = false;
                     
-                    previousHeadPosition = snakePosition;
-                    snakePosition += snakeDirection;
-                    WrapPosition();
-                    
-                    snakeMovePositionList.Insert(0, previousHeadPosition);
-                    
-                    transform.position = new Vector3(snakePosition.x, snakePosition.y);
-                    transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
-                    /*
-                    Debug.Log(
-                        $"Body parts: {snakeBodyList.Count}, " +
-                        $"positions: {snakeMovePositionList.Count}"
-                    );
-                    */
-                    for (int i = 0; i < snakeBodyList.Count; i++)
-                    {
-                        Vector2Int bodyPosition = snakeMovePositionList[i];
-                
-                        snakeBodyList[i].position = new Vector3(bodyPosition.x, bodyPosition.y);
-                        //Debug.Log("snakeBodyList:" + snakeBodyList.Count);
-                    }
-                    CheckPosCollision();
+            previousHeadPosition = snakePosition;
+            snakePosition += snakeDirection;
+            WrapPosition();
             
-                    while (snakeMovePositionList.Count > snakeBodyList.Count)
-                    {
-                        snakeMovePositionList.RemoveAt(
-                            snakeMovePositionList.Count - 1
-                        );
-                    }
+            snakeMovePositionList.Insert(0, previousHeadPosition);
+            
+            transform.position = new Vector3(snakePosition.x, snakePosition.y);
+            transform.eulerAngles = new Vector3(0,0,GetAngleFromVector(snakeDirection)-90f);
+            /*
+            Debug.Log(
+                $"Body parts: {snakeBodyList.Count}, " +
+                $"positions: {snakeMovePositionList.Count}"
+            );
+            */
+            for (int i = 0; i < snakeBodyList.Count; i++)
+            {
+                Vector2Int bodyPosition = snakeMovePositionList[i];
+        
+                snakeBodyList[i].position = new Vector3(bodyPosition.x, bodyPosition.y);
+                //Debug.Log("snakeBodyList:" + snakeBodyList.Count);
+            }
+            CheckPosCollision();
+    
+            while (snakeMovePositionList.Count > snakeBodyList.Count)
+            {
+                snakeMovePositionList.RemoveAt(
+                    snakeMovePositionList.Count - 1
+                );
+            }
         }
         
     }

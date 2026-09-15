@@ -76,11 +76,11 @@ public class FoodSpawner : MonoBehaviour
 
     public IEnumerator Respawn()
     {
-        ParticleSystem ps = food.GetComponentInChildren<ParticleSystem>();
+        ParticleSystem deathPS = food.GetComponentInChildren<ParticleSystem>();
         SpriteRenderer foodSpriteRenderer = food.GetComponentInChildren<SpriteRenderer>();
         foodSpriteRenderer.enabled = false;
-        ps.Play();
-        yield return new WaitUntil(() => !ps.IsAlive());
+        deathPS.Play();
+        yield return new WaitUntil(() => !deathPS.IsAlive());
 
         Destroy(food);
         SpawnFood();

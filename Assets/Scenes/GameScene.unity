@@ -12179,7 +12179,7 @@ MonoBehaviour:
   - {fileID: 4577123700753185633, guid: 99d5e9f59fcb57e4ab6a2886027793c3, type: 3}
   wallSpawnTime: 5
   endPoindOffset: {x: 50, y: 0}
-  indicatorEdgePadding: 0.05
+  indicatorEdgePadding: 0.1
   WallsLLifetime: 5
 --- !u!4 &195768317
 Transform:
@@ -13050,7 +13050,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1052549496
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14064,7 +14064,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1738317095}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 427a520dc24cc7948b274f9bee8fb8b3, type: 2}
+  m_PlayableAsset: {fileID: 0}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -14487,6 +14487,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Start_Button
       objectReference: {fileID: 0}
+    - target: {fileID: 4412844535302990579, guid: 622e22cddb7957141b5e532c4bf5ebeb, type: 3}
+      propertyPath: m_Transition
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4412844535302990579, guid: 622e22cddb7957141b5e532c4bf5ebeb, type: 3}
+      propertyPath: m_SpriteState.m_PressedSprite
+      value: 
+      objectReference: {fileID: 6606902279412789846, guid: 1dfa2f80e0e7b8746b33a80ec9fc8aa1, type: 3}
+    - target: {fileID: 4412844535302990579, guid: 622e22cddb7957141b5e532c4bf5ebeb, type: 3}
+      propertyPath: m_SpriteState.m_HighlightedSprite
+      value: 
+      objectReference: {fileID: -6413627706450616886, guid: ccad905496a65774c8d5e703d9dd7aea, type: 3}
     - target: {fileID: 4412844535302990579, guid: 622e22cddb7957141b5e532c4bf5ebeb, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

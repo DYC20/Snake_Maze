@@ -89,7 +89,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3443883044627142788}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c86e6441a920a5347811a5d337236ca4, type: 3}
   m_Name: 
@@ -106,8 +106,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d514c84d571169e4294e961eacfa2c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  normalColor: {r: 0.7725491, g: 0.1254902, b: 0.11764707, a: 0}
-  hoverColor: {r: 1, g: 0.27058825, b: 0.2627451, a: 0}
+  normalColor: {r: 0.7725491, g: 0.1254902, b: 0.11764707, a: 1}
+  hoverColor: {r: 1, g: 0.27058825, b: 0.2627451, a: 1}
   effect: {fileID: 3326220239933914838, guid: e1109047d6c1ddb43b74797410d3b5de, type: 3}
   waitForPS: 0.25
   tweenDuration: 0.2
@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3477441425005151457}
   - component: {fileID: 7086740627675997646}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Food_Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,6 +257,10 @@ PrefabInstance:
     - target: {fileID: 8834537284079343494, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
       propertyPath: m_Name
       value: EatFood_PS
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834537284079343494, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

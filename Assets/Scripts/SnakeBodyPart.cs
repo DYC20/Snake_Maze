@@ -22,6 +22,8 @@ public class SnakeBodyPart : MonoBehaviour
         ps.Play();
         yield return new WaitUntil(() => !ps.IsAlive());
         
+        snake.RemoveBodyPart(gameObject.GetComponent<SnakeBodyPart>());
+        
         Destroy(gameObject);
     }
     
@@ -31,7 +33,7 @@ public class SnakeBodyPart : MonoBehaviour
         {
             //Debug.Log("Body Hit:" + collision.gameObject.name);
             //Debug.Log("this GO: " + gameObject);
-            snake.RemoveBodyPart(gameObject.GetComponent<SnakeBodyPart>());
+            StartCoroutine(DestroyBodyPart());
         }
     }
 }

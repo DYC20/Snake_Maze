@@ -60,11 +60,6 @@ public class Food : MonoBehaviour
         {
             Debug.LogError("Effect is null");
         }
-
-        if (effect.main.duration == 0f)
-        {
-            Destroy(ps.gameObject);
-        }
     }
 
     // Update is called once per frame
