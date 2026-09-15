@@ -24,7 +24,8 @@ public class FoodSpawner : MonoBehaviour
 
     [Header("Grid")]    
     [SerializeField] private Vector2Int startGrid;
-    [SerializeField] private int gridGrowAmount; 
+    [SerializeField] private int gridGrowAmount;
+    [SerializeField] private int gridPadding;
     private Vector2Int gridCenter;
     private Vector2Int minBounds;
     private Vector2Int maxBounds;
@@ -33,8 +34,10 @@ public class FoodSpawner : MonoBehaviour
     private void Start()
     {
         gameRef = GameRef.instance;
-        maxBounds = gameRef.BoardGrid.Max;
-        minBounds = gameRef.BoardGrid.Min;
+        maxBounds = new Vector2Int(gameRef.BoardGrid.Max.x
+            , gameRef.BoardGrid.Max.y - gridPadding);
+        minBounds = new Vector2Int(gameRef.BoardGrid.Min.x
+            , gameRef.BoardGrid.Min.y + gridPadding);
         InitializeGrid();
     }
     private void FirstSpawn()
@@ -117,7 +120,7 @@ public class FoodSpawner : MonoBehaviour
     //Helper | Written with AI
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;
+        Gizmos.color = Color.red;
 
         Vector3 center = new Vector3(
             (currentGridMin.x + currentGridMax.x) / 2f,

@@ -230,6 +230,7 @@ public class Snake : MonoBehaviour
             .GetComponent<PlayableDirector>();
         PlayableAsset pa = gameRef.EndGameCanvasTL;
         pd.playableAsset = pa;
+        pd.Play();
         Destroy(gameObject);
     }
     private IEnumerator CallEatTween()
