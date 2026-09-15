@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Food : MonoBehaviour
 {
+    [Header("Sound Effects")]
+    [SerializeField]private AudioSource audioSource;
+    [SerializeField]private AudioClip eatSound;
+    [SerializeField]private AudioClip instantiationSound;
+    public AudioClip EatSound => eatSound;
+    
     [Header("Sprite")]
     [SerializeField] private Color normalColor;
     [SerializeField] private Color hoverColor;
@@ -34,6 +40,7 @@ public class Food : MonoBehaviour
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         transform.localScale = Vector3.zero;
         ps = Instantiate(effect, transform.position, effect.transform.rotation);
+        audioSource = GetComponent<AudioSource>();
         if (effect == null)
         {
             Debug.LogError("No effect attached to " + gameObject.name);
@@ -43,6 +50,7 @@ public class Food : MonoBehaviour
 
     private void InstantiationTween()
     {
+        audioSource.PlayOneShot(instantiationSound);
         Sequence seq = DOTween.Sequence();
 
         seq.AppendCallback(() =>

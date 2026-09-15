@@ -11,6 +11,8 @@ public class FoodSpawner : MonoBehaviour
     [SerializeField] private GameObject foodPrefab;
     [SerializeField] private float foodLifetime = 3f;
     private GameObject food;
+    public GameObject Food => food;
+    private bool isRespawning = false;
     private float foodTimer;
     private Vector2Int foodPos;
     public Vector2Int FoodPos => foodPos;
@@ -65,6 +67,7 @@ public class FoodSpawner : MonoBehaviour
          foodPos = new Vector2Int(Random.Range(currentGridMin.x, currentGridMax.x),
              Random.Range(currentGridMin.y, currentGridMax.y));
          food = Instantiate(foodPrefab, new Vector3(foodPos.x, foodPos.y), Quaternion.identity);
+         isRespawning = false;
          GrowGrid();
      }
 
@@ -79,10 +82,16 @@ public class FoodSpawner : MonoBehaviour
 
     public IEnumerator Respawn()
     {
+        if (isRespawning)
+            yield break;
+        isRespawning = true;
         ParticleSystem deathPS = food.GetComponentInChildren<ParticleSystem>();
         SpriteRenderer foodSpriteRenderer = food.GetComponentInChildren<SpriteRenderer>();
         foodSpriteRenderer.enabled = false;
         deathPS.Play();
+        AudioSource audioSource = food.GetComponentInChildren<AudioSource>();
+        AudioClip eatSound = food.GetComponentInChildren<Food>().EatSound;
+        audioSource.PlayOneShot(eatSound);
         yield return new WaitUntil(() => !deathPS.IsAlive());
 
         Destroy(food);

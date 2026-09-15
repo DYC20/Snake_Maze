@@ -32,13 +32,13 @@ public class BoardGrid : MonoBehaviour
         );
 
         Min = new Vector2Int(
-            Mathf.CeilToInt(bottomLeft.x),
-            Mathf.CeilToInt(bottomLeft.y)
+            Mathf.CeilToInt(bottomLeft.x + 2.5f),
+            Mathf.CeilToInt(bottomLeft.y + 1f)
         );
 
         Max = new Vector2Int(
-            Mathf.FloorToInt(topRight.x),
-            Mathf.FloorToInt(topRight.y)
+            Mathf.FloorToInt(topRight.x - 2.5f),
+            Mathf.FloorToInt(topRight.y - 1f)
         );
     }
 

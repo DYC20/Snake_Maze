@@ -14,6 +14,7 @@ public class GameRef : MonoBehaviour
     [SerializeField] private FoodSpawner foodSpawner;
     [SerializeField] private BoardGrid boardGrid;
     [SerializeField] private WallSpawner wallSpawner;
+    [SerializeField] private GameObject coinPrefab;
     [SerializeField] private GameHandler gameHandler;
     
     //Getters
@@ -25,6 +26,7 @@ public class GameRef : MonoBehaviour
     public FoodSpawner FoodSpawner => foodSpawner;
     public BoardGrid BoardGrid => boardGrid;
     public WallSpawner WallSpawner => wallSpawner;
+    public GameObject CoinPrefab => coinPrefab;
     public GameHandler GameHandler => gameHandler;
 
     private void Awake()

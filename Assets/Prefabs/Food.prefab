@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2978737542004024416}
   - component: {fileID: 4681592915911708501}
+  - component: {fileID: -4093889584604646748}
   - component: {fileID: 1904115146506272943}
   - component: {fileID: 431000701858855796}
+  - component: {fileID: 5160271570355655551}
   m_Layer: 6
   m_Name: Food
   m_TagString: Untagged
@@ -82,6 +84,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.6248711, y: 0.655161}
   m_EdgeRadius: 0
+--- !u!114 &-4093889584604646748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443883044627142788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a9ee0632866e99429230af2d417de1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CoinTween
+  NumberOfCoins: 3
+  incrementBy: 0.1
+  scaleDuration: 1
+  targetScale: 1
+  scaleEase: 0
+  movementDuration: 1
+  moveEase: 0
 --- !u!114 &1904115146506272943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,6 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d514c84d571169e4294e961eacfa2c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  audioSource: {fileID: 5160271570355655551}
+  eatSound: {fileID: 8300000, guid: 04ff73399209c084e8ad19ca6171ebf1, type: 3}
+  instantiationSound: {fileID: 8300000, guid: 4e48fab12bbc8af44bcf6e5af2cb3a81, type: 3}
   normalColor: {r: 0.7725491, g: 0.1254902, b: 0.11764707, a: 1}
   hoverColor: {r: 1, g: 0.27058825, b: 0.2627451, a: 1}
   effect: {fileID: 3326220239933914838, guid: e1109047d6c1ddb43b74797410d3b5de, type: 3}
@@ -115,6 +139,103 @@ MonoBehaviour:
   shakeStrength: {x: 0, y: 0, z: 55}
   shakeVibrato: 20
   scaleValue: 1.6
+--- !u!82 &5160271570355655551
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3443883044627142788}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1.81
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 64
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &5939693269158289576
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,6 +375,82 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: InitialModule.startSize.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: InitialModule.startSizeY.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: InitialModule.startSizeZ.minMaxState
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.atime2
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime0
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime1
+      value: 25939
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime2
+      value: 65509
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 0.35181612
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 0.62352943
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 0.5058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0.9882353
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0.97374654
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.g
+      value: 0.46124485
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.r
+      value: 0.62352943
+      objectReference: {fileID: 0}
+    - target: {fileID: 3326220239933914838, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumColorKeys
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7881631265865718477, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b13d523b625c534eab8fa02e2e0e5ea, type: 2}
     - target: {fileID: 8834537284079343494, guid: e3ad196b666af16449f9d3c755798b4d, type: 3}
       propertyPath: m_Name
       value: EatFood_PS

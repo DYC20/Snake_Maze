@@ -74,6 +74,7 @@ public class Snake : MonoBehaviour
         timer -= Time.deltaTime;
         if ( timer <= 0 )
         {
+            isMoving = true;
             //move snake in direction
             timer += 1f / movemantSpeed;
             MoveSnake();
@@ -182,13 +183,16 @@ public class Snake : MonoBehaviour
                 );
             }
         }
-        
+
+    
+        isMoving = false;
     }
 
     private void CheckPosCollision()
     {
         if (foodSpawner.FoodPos == snakePosition)
         {
+            isMoving = false;
             EatFood();
             StartCoroutine(foodSpawner.Respawn());
         }
@@ -210,6 +214,8 @@ public class Snake : MonoBehaviour
         pointsTracker.ResetPoints();
         gameRef.GameHandler.GameEnd();
         
+        gameObject.GetComponent<AudioSource>().Play();
+        
         SpriteRenderer sr = gameObject
             .GetComponentInChildren<SpriteRenderer>();
         sr.enabled = false;
@@ -217,6 +223,8 @@ public class Snake : MonoBehaviour
             .GetComponentInChildren<ParticleSystem>();
         ps.Play();
         yield return new WaitUntil(() => !ps.IsAlive());
+        
+        Destroy(ps.gameObject);
         
         for (int i = 0; i < snakeBodyList.Count; i++)
         {
@@ -247,6 +255,11 @@ public class Snake : MonoBehaviour
     private void EatFood()
     {
         //Add points
+        //CoinTween collectCoin = foodSpawner.Food.GetComponent<CoinTween>();
+        
+        //Respawn food here for accessing coin before food dies
+        
+        //collectCoin.CollectCoin();
         pointsTracker.AddPoints();
         
         StartCoroutine(CallEatTween());
