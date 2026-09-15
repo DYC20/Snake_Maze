@@ -246,7 +246,7 @@ public class Snake : MonoBehaviour
         StartCoroutine(CallEatTween());
         //Increase speed
         movemantSpeed += speedIncrease;
-        wallSpawner.WallSpawnTime -= speedIncrease;
+        wallSpawner.WallSpawnTime -= speedIncrease / 2f;
         //Written with AI start
         int newBodyIndex = snakeBodyList.Count;
         

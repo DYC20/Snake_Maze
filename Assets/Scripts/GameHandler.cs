@@ -29,7 +29,7 @@ public class GameHandler : MonoBehaviour
         wallSpawner.GameStarted = true;
         foodSpawner.GameStarted = true;
         foodSpawner.NotFirstSpawn = false;
-        startGameCanvas.gameObject.SetActive(false);
+        //startGameCanvas.gameObject.SetActive(false);
         endGameCanvas.gameObject.SetActive(false);
     }
 
