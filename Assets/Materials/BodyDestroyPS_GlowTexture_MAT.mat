@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FoodBornPS_GlowTexture_MAT
+  m_Name: BodyDestroyPS_GlowTexture_MAT
   m_Shader: {fileID: -6465566751694194690, guid: fde99b77862eb364e8bcad58f7765938, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -53,14 +53,14 @@ Material:
     - _EdgeSize: 0
     - _FindEdge: 0.87
     - _HasTexture: 0
-    - _MaskContrast: 19.4
+    - _MaskContrast: 9.07
     - _MaskSize: 3
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
     - _EdgeOffset: {r: 0, g: 0, b: 0, a: 0}
     - _EdgeTile: {r: 0, g: 0, b: 0, a: 0}
-    - _Emission: {r: 1.4980392, g: 1.4980392, b: 1.4980392, a: 0}
+    - _Emission: {r: 2.9960785, g: 2.9960785, b: 2.9960785, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1932990401100003898
